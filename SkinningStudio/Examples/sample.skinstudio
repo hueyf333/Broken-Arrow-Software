@@ -1,0 +1,99 @@
+{
+  "Themes": [
+    {
+      "Name": "Dark",
+      "ColorTokens": [
+        {
+          "Name": "Primary",
+          "R": 0,
+          "G": 120,
+          "B": 215,
+          "A": 255
+        },
+        {
+          "Name": "Accent",
+          "R": 16,
+          "G": 110,
+          "B": 190,
+          "A": 255
+        },
+        {
+          "Name": "Text",
+          "R": 255,
+          "G": 255,
+          "B": 255,
+          "A": 255
+        },
+        {
+          "Name": "Background",
+          "R": 32,
+          "G": 32,
+          "B": 32,
+          "A": 255
+        },
+        {
+          "Name": "Surface",
+          "R": 45,
+          "G": 45,
+          "B": 45,
+          "A": 255
+        },
+        {
+          "Name": "Border",
+          "R": 60,
+          "G": 60,
+          "B": 60,
+          "A": 255
+        }
+      ],
+      "TypographyTokens": {
+        "FontSizeSmall": 10,
+        "FontSizeNormal": 12,
+        "FontSizeLarge": 14,
+        "FontSizeHeading": 16
+      }
+    }
+  ],
+  "Elements": [
+    {
+      "Id": "panel-1",
+      "Name": "MainPanel",
+      "ElementType": "Panel",
+      "X": 100,
+      "Y": 100,
+      "Width": 400,
+      "Height": 300,
+      "Text": "",
+      "IsVisible": true,
+      "ZIndex": 0,
+      "Children": []
+    },
+    {
+      "Id": "button-1",
+      "Name": "SubmitButton",
+      "ElementType": "Button",
+      "X": 200,
+      "Y": 200,
+      "Width": 120,
+      "Height": 40,
+      "Text": "Submit",
+      "IsVisible": true,
+      "ZIndex": 1,
+      "Children": []
+    },
+    {
+      "Id": "label-1",
+      "Name": "TitleLabel",
+      "ElementType": "Label",
+      "X": 150,
+      "Y": 50,
+      "Width": 200,
+      "Height": 30,
+      "Text": "Welcome",
+      "IsVisible": true,
+      "ZIndex": 2,
+      "Children": []
+    }
+  ],
+  "CurrentThemeName": "Dark"
+}

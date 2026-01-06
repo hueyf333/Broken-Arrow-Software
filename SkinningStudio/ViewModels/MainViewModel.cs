@@ -168,6 +168,45 @@ namespace SkinningStudio.ViewModels
             _project = new ProjectModel();
             _project.Themes.Add(Theme.CreateDefaultDarkTheme());
             _project.CurrentTheme = _project.Themes[0];
+            
+            var panel = new UIElementModel
+            {
+                Name = "MainPanel",
+                ElementType = UIElementType.Panel,
+                X = 100,
+                Y = 100,
+                Width = 400,
+                Height = 300,
+                ZIndex = 0
+            };
+            _project.RootElements.Add(panel);
+
+            var button = new UIElementModel
+            {
+                Name = "SubmitButton",
+                ElementType = UIElementType.Button,
+                X = 200,
+                Y = 200,
+                Width = 120,
+                Height = 40,
+                Text = "Submit",
+                ZIndex = 1
+            };
+            _project.RootElements.Add(button);
+
+            var label = new UIElementModel
+            {
+                Name = "TitleLabel",
+                ElementType = UIElementType.Label,
+                X = 150,
+                Y = 50,
+                Width = 200,
+                Height = 30,
+                Text = "Welcome to Skinning Studio",
+                ZIndex = 2
+            };
+            _project.RootElements.Add(label);
+            
             _undoRedoService.Clear();
             _selectionService.ClearSelection();
             OnPropertyChanged(nameof(Project));
