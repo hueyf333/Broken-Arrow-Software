@@ -50,13 +50,15 @@ cd vcpkg
    ```
 
 3. **Configure vcpkg integration**
-   - The project is already configured to use vcpkg
-   - vcpkg.json contains all required dependencies
+   - The project uses vcpkg **manifest mode** (vcpkg.json)
+   - Ensure vcpkg is integrated: run `vcpkg integrate install` from your vcpkg directory
    - Dependencies will be installed automatically on first build
+   - If dependencies don't install automatically, close and reopen Visual Studio
 
 4. **Build the solution**
    - Select Debug or Release configuration
    - Build > Build Solution (Ctrl+Shift+B)
+   - First build may take several minutes while vcpkg installs dependencies
    - Output will be in `bin/Debug/` or `bin/Release/`
 
 5. **Run SkinningStudio**
@@ -390,9 +392,25 @@ Current version: **1.0.0**
 
 ### Build Issues
 
+**Problem**: Cannot open include file: 'nlohmann/json.hpp': No such file or directory
+- **Solution 1**: Close and reopen Visual Studio to trigger vcpkg dependency restoration
+- **Solution 2**: Ensure vcpkg is integrated with Visual Studio:
+  ```bash
+  vcpkg integrate install
+  ```
+- **Solution 3**: Clean the solution and rebuild:
+  - Build > Clean Solution
+  - Build > Rebuild Solution
+- **Solution 4**: Manually restore vcpkg dependencies:
+  ```bash
+  vcpkg install nlohmann-json:x64-windows
+  ```
+- **Solution 5**: Verify vcpkg.json is in the solution root directory (same folder as .sln file)
+
 **Problem**: vcpkg dependencies not found
 - **Solution**: Ensure vcpkg is integrated with Visual Studio (`vcpkg integrate install`)
 - **Solution**: Check that vcpkg.json is in the solution directory
+- **Solution**: Verify Visual Studio has the "vcpkg integration" feature installed
 
 **Problem**: OpenGL errors
 - **Solution**: Update graphics drivers
