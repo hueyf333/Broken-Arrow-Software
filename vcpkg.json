@@ -1,0 +1,15 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg/master/scripts/vcpkg.schema.json",
+  "name": "skinningstudio",
+  "version": "1.0.0",
+  "dependencies": [
+    "sdl2",
+    "glad",
+    "nlohmann-json",
+    {
+      "name": "imgui",
+      "features": ["docking-experimental", "sdl2-binding", "opengl3-binding"]
+    }
+  ],
+  "builtin-baseline": "a42af01b72c28a8e1d7b48107b33e4f286a55ef6"
+}
