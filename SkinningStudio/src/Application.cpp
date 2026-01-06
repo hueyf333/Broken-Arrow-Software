@@ -7,6 +7,7 @@
 #include <GL/glew.h>
 #include <filesystem>
 #include <fstream>
+#include <algorithm>
 
 Application::Application() {
 }
@@ -226,11 +227,11 @@ void Application::RenderMenuBar() {
         }
         
         if (ImGui::BeginMenu("View")) {
-            ImGui::MenuItem("Hierarchy", nullptr, &m_hierarchyPanel);
-            ImGui::MenuItem("Inspector", nullptr, &m_inspectorPanel);
-            ImGui::MenuItem("Asset Library", nullptr, &m_assetLibraryPanel);
-            ImGui::MenuItem("Canvas", nullptr, &m_canvasPanel);
-            ImGui::MenuItem("Runtime Preview", nullptr, &m_runtimePreviewPanel);
+            ImGui::MenuItem("Hierarchy", nullptr, &m_showHierarchyPanel);
+            ImGui::MenuItem("Inspector", nullptr, &m_showInspectorPanel);
+            ImGui::MenuItem("Asset Library", nullptr, &m_showAssetLibraryPanel);
+            ImGui::MenuItem("Canvas", nullptr, &m_showCanvasPanel);
+            ImGui::MenuItem("Runtime Preview", nullptr, &m_showRuntimePreviewPanel);
             
             ImGui::Separator();
             
@@ -274,11 +275,21 @@ void Application::RenderMenuBar() {
 }
 
 void Application::RenderPanels() {
-    m_hierarchyPanel.Render(m_rootElements, m_selectedElement);
-    m_inspectorPanel.Render(m_selectedElement, &m_commandManager);
-    m_assetLibraryPanel.Render(m_theme);
-    m_canvasPanel.Render(m_rootElements, m_styleResolver.get(), m_selectedElement, &m_commandManager);
-    m_runtimePreviewPanel.Render(m_rootElements, m_styleResolver.get());
+    if (m_showHierarchyPanel) {
+        m_hierarchyPanel.Render(m_rootElements, m_selectedElement);
+    }
+    if (m_showInspectorPanel) {
+        m_inspectorPanel.Render(m_selectedElement, &m_commandManager);
+    }
+    if (m_showAssetLibraryPanel) {
+        m_assetLibraryPanel.Render(m_theme);
+    }
+    if (m_showCanvasPanel) {
+        m_canvasPanel.Render(m_rootElements, m_styleResolver.get(), m_selectedElement, &m_commandManager);
+    }
+    if (m_showRuntimePreviewPanel) {
+        m_runtimePreviewPanel.Render(m_rootElements, m_styleResolver.get());
+    }
 }
 
 void Application::RenderDialogs() {

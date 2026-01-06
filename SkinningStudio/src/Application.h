@@ -57,6 +57,13 @@ private:
     bool m_showOptimizerDialog = false;
     bool m_showShortcutsOverlay = false;
     
+    // Panel visibility
+    bool m_showHierarchyPanel = true;
+    bool m_showInspectorPanel = true;
+    bool m_showAssetLibraryPanel = true;
+    bool m_showCanvasPanel = true;
+    bool m_showRuntimePreviewPanel = true;
+    
     std::vector<ValidationIssue> m_validationIssues;
     OptimizationResult m_optimizationResult;
     

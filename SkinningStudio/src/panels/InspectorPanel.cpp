@@ -1,5 +1,6 @@
 #include "panels/InspectorPanel.h"
 #include <imgui.h>
+#include <cstring>
 
 void InspectorPanel::Render(UIElement* selectedElement, CommandManager* commandManager) {
     ImGui::Begin("Inspector");
