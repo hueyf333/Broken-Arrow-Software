@@ -1,0 +1,165 @@
+﻿<Window x:Class="SkinningStudio.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SkinningStudio"
+        xmlns:vm="clr-namespace:SkinningStudio.ViewModels"
+        xmlns:views="clr-namespace:SkinningStudio.Views"
+        mc:Ignorable="d"
+        Title="Broken Arrow Skinning Studio" 
+        Height="900" Width="1600"
+        WindowState="Maximized">
+    
+    <Window.DataContext>
+        <vm:MainViewModel/>
+    </Window.DataContext>
+
+    <Window.InputBindings>
+        <KeyBinding Key="Z" Modifiers="Ctrl" Command="{Binding UndoCommand}"/>
+        <KeyBinding Key="Y" Modifiers="Ctrl" Command="{Binding RedoCommand}"/>
+        <KeyBinding Key="S" Modifiers="Ctrl" Command="{Binding SaveCommand}"/>
+        <KeyBinding Key="O" Modifiers="Ctrl" Command="{Binding OpenCommand}"/>
+        <KeyBinding Key="D" Modifiers="Ctrl" Command="{Binding DuplicateCommand}"/>
+        <KeyBinding Key="Delete" Command="{Binding DeleteCommand}"/>
+        <KeyBinding Key="A" Modifiers="Ctrl" Command="{Binding SelectAllCommand}"/>
+    </Window.InputBindings>
+
+    <DockPanel>
+        <!-- Menu Bar -->
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_New" Command="{Binding NewCommand}" InputGestureText="Ctrl+N"/>
+                <MenuItem Header="_Open..." Command="{Binding OpenCommand}" InputGestureText="Ctrl+O"/>
+                <MenuItem Header="_Save" Command="{Binding SaveCommand}" InputGestureText="Ctrl+S"/>
+                <MenuItem Header="Save _As..." Command="{Binding SaveAsCommand}"/>
+                <Separator/>
+                <MenuItem Header="_Import Theme..." Command="{Binding ImportThemeCommand}"/>
+                <MenuItem Header="_Export Theme..." Command="{Binding ExportThemeCommand}"/>
+                <MenuItem Header="Export _Layout..." Command="{Binding ExportLayoutCommand}"/>
+                <Separator/>
+                <MenuItem Header="E_xit" Command="{Binding ExitCommand}"/>
+            </MenuItem>
+            <MenuItem Header="_Edit">
+                <MenuItem Header="_Undo" Command="{Binding UndoCommand}" InputGestureText="Ctrl+Z"/>
+                <MenuItem Header="_Redo" Command="{Binding RedoCommand}" InputGestureText="Ctrl+Y"/>
+                <Separator/>
+                <MenuItem Header="Cu_t" Command="{Binding CutCommand}" InputGestureText="Ctrl+X"/>
+                <MenuItem Header="_Copy" Command="{Binding CopyCommand}" InputGestureText="Ctrl+C"/>
+                <MenuItem Header="_Paste" Command="{Binding PasteCommand}" InputGestureText="Ctrl+V"/>
+                <MenuItem Header="_Duplicate" Command="{Binding DuplicateCommand}" InputGestureText="Ctrl+D"/>
+                <MenuItem Header="_Delete" Command="{Binding DeleteCommand}" InputGestureText="Delete"/>
+                <Separator/>
+                <MenuItem Header="Select _All" Command="{Binding SelectAllCommand}" InputGestureText="Ctrl+A"/>
+            </MenuItem>
+            <MenuItem Header="_View">
+                <MenuItem Header="Show _Hierarchy" IsCheckable="True" IsChecked="{Binding ShowHierarchy}"/>
+                <MenuItem Header="Show _Inspector" IsCheckable="True" IsChecked="{Binding ShowInspector}"/>
+                <MenuItem Header="Show _Theme Library" IsCheckable="True" IsChecked="{Binding ShowThemeLibrary}"/>
+                <MenuItem Header="Show _Live Preview" IsCheckable="True" IsChecked="{Binding ShowLivePreview}"/>
+                <Separator/>
+                <MenuItem Header="Show _Grid" IsCheckable="True" IsChecked="{Binding ShowGrid}" Command="{Binding ToggleGridCommand}"/>
+                <MenuItem Header="_Snap to Grid" IsCheckable="True" IsChecked="{Binding SnapToGrid}" Command="{Binding ToggleSnapCommand}"/>
+                <Separator/>
+                <MenuItem Header="_Reset Layout"/>
+            </MenuItem>
+            <MenuItem Header="_Tools">
+                <MenuItem Header="_Validate Project"/>
+                <MenuItem Header="Theme _Cleanup"/>
+                <MenuItem Header="_Preferences"/>
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Header="Keyboard _Shortcuts"/>
+                <MenuItem Header="_About"/>
+            </MenuItem>
+        </Menu>
+
+        <!-- Toolbar -->
+        <ToolBar DockPanel.Dock="Top">
+            <Button Content="New" Command="{Binding NewCommand}" Margin="2"/>
+            <Button Content="Open" Command="{Binding OpenCommand}" Margin="2"/>
+            <Button Content="Save" Command="{Binding SaveCommand}" Margin="2"/>
+            <Separator/>
+            <Button Content="Undo" Command="{Binding UndoCommand}" Margin="2"/>
+            <Button Content="Redo" Command="{Binding RedoCommand}" Margin="2"/>
+            <Separator/>
+            <Button Content="Panel" Command="{Binding AddElementCommand}" CommandParameter="Panel" Margin="2"/>
+            <Button Content="Button" Command="{Binding AddElementCommand}" CommandParameter="Button" Margin="2"/>
+            <Button Content="Label" Command="{Binding AddElementCommand}" CommandParameter="Label" Margin="2"/>
+            <Button Content="TextBox" Command="{Binding AddElementCommand}" CommandParameter="TextBox" Margin="2"/>
+            <Button Content="CheckBox" Command="{Binding AddElementCommand}" CommandParameter="CheckBox" Margin="2"/>
+            <Button Content="Slider" Command="{Binding AddElementCommand}" CommandParameter="Slider" Margin="2"/>
+            <Button Content="Image" Command="{Binding AddElementCommand}" CommandParameter="Image" Margin="2"/>
+        </ToolBar>
+
+        <!-- Main Content Grid -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250" MinWidth="150"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="300" MinWidth="200"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Left Panel: Hierarchy -->
+            <Border Grid.Column="0" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1"
+                    Visibility="{Binding ShowHierarchy, Converter={StaticResource BoolToVisibilityConverter}}">
+                <views:HierarchyPanel DataContext="{Binding}"/>
+            </Border>
+
+            <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                          Visibility="{Binding ShowHierarchy, Converter={StaticResource BoolToVisibilityConverter}}"/>
+
+            <!-- Center Panel: Canvas and Live Preview -->
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="300" MinHeight="100"/>
+                </Grid.RowDefinitions>
+
+                <!-- Design Canvas -->
+                <Border Grid.Row="0" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1">
+                    <views:DesignCanvas DataContext="{Binding}"/>
+                </Border>
+
+                <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                              Visibility="{Binding ShowLivePreview, Converter={StaticResource BoolToVisibilityConverter}}"/>
+
+                <!-- Live Preview -->
+                <Border Grid.Row="2" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1"
+                        Visibility="{Binding ShowLivePreview, Converter={StaticResource BoolToVisibilityConverter}}">
+                    <views:LivePreviewPanel DataContext="{Binding}"/>
+                </Border>
+            </Grid>
+
+            <GridSplitter Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+            <!-- Right Panel: Inspector and Theme Library -->
+            <Grid Grid.Column="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Inspector -->
+                <Border Grid.Row="0" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1"
+                        Visibility="{Binding ShowInspector, Converter={StaticResource BoolToVisibilityConverter}}">
+                    <views:InspectorPanel DataContext="{Binding}"/>
+                </Border>
+
+                <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                              Visibility="{Binding ShowInspector, Converter={StaticResource BoolToVisibilityConverter}}"/>
+
+                <!-- Theme Library -->
+                <Border Grid.Row="2" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1"
+                        Visibility="{Binding ShowThemeLibrary, Converter={StaticResource BoolToVisibilityConverter}}">
+                    <views:ThemeLibraryPanel DataContext="{Binding}"/>
+                </Border>
+            </Grid>
+        </Grid>
+    </DockPanel>
+</Window>
+
