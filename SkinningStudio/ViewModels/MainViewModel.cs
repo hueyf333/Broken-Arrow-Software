@@ -2,6 +2,7 @@ using SkinningStudio.Commands;
 using SkinningStudio.Models;
 using SkinningStudio.Serialization;
 using SkinningStudio.Services;
+using SkinningStudio.Views.Dialogs;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
@@ -117,6 +118,13 @@ namespace SkinningStudio.ViewModels
         public ICommand ExportLayoutCommand { get; private set; } = null!;
         public ICommand ToggleGridCommand { get; private set; } = null!;
         public ICommand ToggleSnapCommand { get; private set; } = null!;
+        public ICommand BringToFrontCommand { get; private set; } = null!;
+        public ICommand SendToBackCommand { get; private set; } = null!;
+        public ICommand CreateThemeCommand { get; private set; } = null!;
+        public ICommand DuplicateThemeCommand { get; private set; } = null!;
+        public ICommand DeleteThemeCommand { get; private set; } = null!;
+        public ICommand ShowShortcutsCommand { get; private set; } = null!;
+        public ICommand ShowAboutCommand { get; private set; } = null!;
 
         private void InitializeCommands()
         {
@@ -143,6 +151,16 @@ namespace SkinningStudio.ViewModels
             
             ToggleGridCommand = new RelayCommand(_ => ShowGrid = !ShowGrid);
             ToggleSnapCommand = new RelayCommand(_ => SnapToGrid = !SnapToGrid);
+            
+            BringToFrontCommand = new RelayCommand(_ => BringToFront(), _ => _selectionService.SelectedElements.Any());
+            SendToBackCommand = new RelayCommand(_ => SendToBack(), _ => _selectionService.SelectedElements.Any());
+            
+            CreateThemeCommand = new RelayCommand(_ => CreateTheme());
+            DuplicateThemeCommand = new RelayCommand(_ => DuplicateTheme(), _ => _project.CurrentTheme != null);
+            DeleteThemeCommand = new RelayCommand(_ => DeleteTheme(), _ => _project.Themes.Count > 1);
+            
+            ShowShortcutsCommand = new RelayCommand(_ => ShowShortcuts());
+            ShowAboutCommand = new RelayCommand(_ => ShowAbout());
         }
 
         private void NewProject()
@@ -357,6 +375,69 @@ namespace SkinningStudio.ViewModels
                     MessageBox.Show($"Failed to export layout: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+        }
+
+        private void BringToFront()
+        {
+            var selected = _selectionService.SelectedElements.FirstOrDefault();
+            if (selected == null) return;
+
+            var maxZIndex = _project.RootElements.Max(e => e.ZIndex);
+            selected.ZIndex = maxZIndex + 1;
+            _project.IsDirty = true;
+        }
+
+        private void SendToBack()
+        {
+            var selected = _selectionService.SelectedElements.FirstOrDefault();
+            if (selected == null) return;
+
+            var minZIndex = _project.RootElements.Min(e => e.ZIndex);
+            selected.ZIndex = minZIndex - 1;
+            _project.IsDirty = true;
+        }
+
+        private void CreateTheme()
+        {
+            var theme = _themeService.CreateTheme("New Theme");
+            _project.Themes.Add(theme);
+            _project.CurrentTheme = theme;
+            _project.IsDirty = true;
+        }
+
+        private void DuplicateTheme()
+        {
+            var duplicate = _themeService.DuplicateTheme(_project.CurrentTheme);
+            _project.Themes.Add(duplicate);
+            _project.CurrentTheme = duplicate;
+            _project.IsDirty = true;
+        }
+
+        private void DeleteTheme()
+        {
+            if (_project.Themes.Count > 1)
+            {
+                var themeToDelete = _project.CurrentTheme;
+                var newCurrent = _project.Themes.FirstOrDefault(t => t != themeToDelete);
+                if (newCurrent != null)
+                {
+                    _project.CurrentTheme = newCurrent;
+                    _project.Themes.Remove(themeToDelete);
+                    _project.IsDirty = true;
+                }
+            }
+        }
+
+        private void ShowShortcuts()
+        {
+            var dialog = new ShortcutsDialog { Owner = Application.Current.MainWindow };
+            dialog.ShowDialog();
+        }
+
+        private void ShowAbout()
+        {
+            var dialog = new AboutDialog { Owner = Application.Current.MainWindow };
+            dialog.ShowDialog();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

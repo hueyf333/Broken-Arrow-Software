@@ -51,6 +51,9 @@
                 <MenuItem Header="_Delete" Command="{Binding DeleteCommand}" InputGestureText="Delete"/>
                 <Separator/>
                 <MenuItem Header="Select _All" Command="{Binding SelectAllCommand}" InputGestureText="Ctrl+A"/>
+                <Separator/>
+                <MenuItem Header="Bring to _Front" Command="{Binding BringToFrontCommand}"/>
+                <MenuItem Header="Send to _Back" Command="{Binding SendToBackCommand}"/>
             </MenuItem>
             <MenuItem Header="_View">
                 <MenuItem Header="Show _Hierarchy" IsCheckable="True" IsChecked="{Binding ShowHierarchy}"/>
@@ -69,8 +72,8 @@
                 <MenuItem Header="_Preferences"/>
             </MenuItem>
             <MenuItem Header="_Help">
-                <MenuItem Header="Keyboard _Shortcuts"/>
-                <MenuItem Header="_About"/>
+                <MenuItem Header="Keyboard _Shortcuts" Command="{Binding ShowShortcutsCommand}"/>
+                <MenuItem Header="_About" Command="{Binding ShowAboutCommand}"/>
             </MenuItem>
         </Menu>
 

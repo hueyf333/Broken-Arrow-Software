@@ -15,7 +15,8 @@
                    Padding="5"
                    Background="{StaticResource SurfaceBrush}"/>
         
-        <TreeView ItemsSource="{Binding Project.RootElements}" 
+        <TreeView x:Name="ElementTree"
+                  ItemsSource="{Binding Project.RootElements}" 
                   Margin="5">
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Children}">
