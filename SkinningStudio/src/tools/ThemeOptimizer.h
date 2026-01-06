@@ -5,6 +5,7 @@
 #include <vector>
 #include <memory>
 #include <string>
+#include <unordered_set>
 
 struct OptimizationResult {
     std::vector<std::string> unusedTokens;

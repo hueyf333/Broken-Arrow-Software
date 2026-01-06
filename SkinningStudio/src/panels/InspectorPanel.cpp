@@ -14,15 +14,17 @@ void InspectorPanel::Render(UIElement* selectedElement, CommandManager* commandM
     // Basic properties
     ImGui::SeparatorText("Basic");
     
-    char nameBuf[256];
+    char nameBuf[256] = {0};
     strncpy(nameBuf, selectedElement->name.c_str(), sizeof(nameBuf) - 1);
+    nameBuf[sizeof(nameBuf) - 1] = '\0';
     if (ImGui::InputText("Name", nameBuf, sizeof(nameBuf))) {
         selectedElement->name = nameBuf;
         if (onPropertyChanged) onPropertyChanged();
     }
     
-    char idBuf[256];
+    char idBuf[256] = {0};
     strncpy(idBuf, selectedElement->id.c_str(), sizeof(idBuf) - 1);
+    idBuf[sizeof(idBuf) - 1] = '\0';
     ImGui::InputText("ID", idBuf, sizeof(idBuf), ImGuiInputTextFlags_ReadOnly);
     
     ImGui::Checkbox("Visible", &selectedElement->visible);

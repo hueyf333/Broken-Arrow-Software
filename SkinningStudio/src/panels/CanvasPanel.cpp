@@ -36,16 +36,25 @@ void CanvasPanel::Render(
     // Render elements
     drawList->PushClipRect(canvasPos, ImVec2(canvasPos.x + canvasSize.x, canvasPos.y + canvasSize.y), true);
     
+    // Save current positions and apply pan offset for rendering
+    std::vector<Vec2> originalPositions;
+    originalPositions.reserve(rootElements.size());
+    
     for (auto& root : rootElements) {
-        // Apply pan offset
+        originalPositions.push_back(Vec2(root->rect.x, root->rect.y));
         root->rect.x += m_panOffset.x;
         root->rect.y += m_panOffset.y;
-        
+    }
+    
+    // Render with offset
+    for (auto& root : rootElements) {
         root->Render(resolver);
-        
-        // Reset offset
-        root->rect.x -= m_panOffset.x;
-        root->rect.y -= m_panOffset.y;
+    }
+    
+    // Restore original positions
+    for (size_t i = 0; i < rootElements.size(); ++i) {
+        rootElements[i]->rect.x = originalPositions[i].x;
+        rootElements[i]->rect.y = originalPositions[i].y;
     }
     
     // Draw selection box
