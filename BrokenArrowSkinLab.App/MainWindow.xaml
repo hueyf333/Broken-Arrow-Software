@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BrokenArrowSkinLab.App"
         xmlns:vm="clr-namespace:BrokenArrowSkinLab.App.ViewModels"
+        xmlns:views="clr-namespace:BrokenArrowSkinLab.App.Views"
         mc:Ignorable="d"
         Title="{Binding WindowTitle}" 
         Height="800" Width="1200"
@@ -129,20 +130,10 @@
                 
                 <TabControl Grid.Row="1">
                     <TabItem Header="Knob Designer">
-                        <Border Background="White" BorderBrush="Gray" BorderThickness="1">
-                            <TextBlock Text="Knob Designer Workspace" 
-                                     HorizontalAlignment="Center" 
-                                     VerticalAlignment="Center"
-                                     Foreground="Gray"/>
-                        </Border>
+                        <views:KnobDesignerView DataContext="{Binding KnobDesigner}"/>
                     </TabItem>
                     <TabItem Header="Skin Layout Designer">
-                        <Border Background="White" BorderBrush="Gray" BorderThickness="1">
-                            <TextBlock Text="Skin Layout Designer Workspace" 
-                                     HorizontalAlignment="Center" 
-                                     VerticalAlignment="Center"
-                                     Foreground="Gray"/>
-                        </Border>
+                        <views:LayoutDesignerView DataContext="{Binding LayoutDesigner}"/>
                     </TabItem>
                 </TabControl>
             </Grid>

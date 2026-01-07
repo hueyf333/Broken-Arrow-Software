@@ -15,6 +15,8 @@ namespace BrokenArrowSkinLab.App.ViewModels;
 public class MainViewModel : ViewModelBase
 {
     private readonly UndoRedoService _undoRedoService = new();
+    private readonly KnobDesignerViewModel _knobDesignerViewModel = new();
+    private readonly LayoutDesignerViewModel _layoutDesignerViewModel = new();
     private ProjectModel _currentProject = new();
     private string? _currentFilePath;
     private bool _isDirty;
@@ -31,6 +33,9 @@ public class MainViewModel : ViewModelBase
     }
 
     #region Properties
+
+    public KnobDesignerViewModel KnobDesigner => _knobDesignerViewModel;
+    public LayoutDesignerViewModel LayoutDesigner => _layoutDesignerViewModel;
 
     public ProjectModel CurrentProject
     {
@@ -124,7 +129,7 @@ public class MainViewModel : ViewModelBase
         OpenProjectCommand = new RelayCommand(async _ => await OpenProjectAsync());
         SaveProjectCommand = new RelayCommand(async _ => await SaveProjectAsync(), _ => IsDirty);
         SaveProjectAsCommand = new RelayCommand(async _ => await SaveProjectAsAsync());
-        ExitCommand = new RelayCommand(_ => Application.Current.Shutdown());
+        ExitCommand = new RelayCommand(_ => global::System.Windows.Application.Current.Shutdown());
 
         // Edit menu
         UndoCommand = new RelayCommand(_ => _undoRedoService.Undo(), _ => _undoRedoService.CanUndo);
@@ -174,7 +179,7 @@ public class MainViewModel : ViewModelBase
         if (!CheckSaveChanges())
             return;
 
-        var dialog = new OpenFileDialog
+        var dialog = new Microsoft.Win32.OpenFileDialog
         {
             Filter = "BrokenArrow SkinLab Project (*.baslproj)|*.baslproj|All Files (*.*)|*.*",
             Title = "Open Project"
@@ -202,8 +207,8 @@ public class MainViewModel : ViewModelBase
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error opening project: {ex.Message}", "Error", 
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                global::System.Windows.MessageBox.Show($"Error opening project: {ex.Message}", "Error", 
+                    global::System.Windows.MessageBoxButton.OK, global::System.Windows.MessageBoxImage.Error);
             }
         }
     }
@@ -226,14 +231,14 @@ public class MainViewModel : ViewModelBase
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Error saving project: {ex.Message}", "Error", 
-                MessageBoxButton.OK, MessageBoxImage.Error);
+            global::System.Windows.MessageBox.Show($"Error saving project: {ex.Message}", "Error", 
+                global::System.Windows.MessageBoxButton.OK, global::System.Windows.MessageBoxImage.Error);
         }
     }
 
     private async Task SaveProjectAsAsync()
     {
-        var dialog = new SaveFileDialog
+        var dialog = new Microsoft.Win32.SaveFileDialog
         {
             Filter = "BrokenArrow SkinLab Project (*.baslproj)|*.baslproj|All Files (*.*)|*.*",
             Title = "Save Project As",
@@ -252,16 +257,16 @@ public class MainViewModel : ViewModelBase
         if (!IsDirty)
             return true;
 
-        var result = MessageBox.Show(
+        var result = global::System.Windows.MessageBox.Show(
             "Do you want to save changes to the current project?",
             "Save Changes",
-            MessageBoxButton.YesNoCancel,
-            MessageBoxImage.Question);
+            global::System.Windows.MessageBoxButton.YesNoCancel,
+            global::System.Windows.MessageBoxImage.Question);
 
-        if (result == MessageBoxResult.Cancel)
+        if (result == global::System.Windows.MessageBoxResult.Cancel)
             return false;
 
-        if (result == MessageBoxResult.Yes)
+        if (result == global::System.Windows.MessageBoxResult.Yes)
         {
             SaveProjectAsync().Wait();
         }
@@ -285,6 +290,7 @@ public class MainViewModel : ViewModelBase
             }
         };
         Knobs.Add(knob);
+        _knobDesignerViewModel.CurrentKnob = knob;
         IsDirty = true;
         StatusText = $"Created new knob: {knob.Name}";
     }
@@ -296,6 +302,7 @@ public class MainViewModel : ViewModelBase
             Name = $"Layout {Layouts.Count + 1}"
         };
         Layouts.Add(layout);
+        _layoutDesignerViewModel.CurrentLayout = layout;
         IsDirty = true;
         StatusText = $"Created new layout: {layout.Name}";
     }
@@ -315,37 +322,37 @@ public class MainViewModel : ViewModelBase
                 ? $"Self-test completed successfully!\n\nPassed: {result.TestsPassed}/{result.TotalTests}\n\n{result.Log}"
                 : $"Self-test failed!\n\nPassed: {result.TestsPassed}/{result.TotalTests}\n\n{result.Log}";
 
-            MessageBox.Show(message, "Self-Test Results", 
-                MessageBoxButton.OK, 
-                result.Success ? MessageBoxImage.Information : MessageBoxImage.Warning);
+            global::System.Windows.MessageBox.Show(message, "Self-Test Results", 
+                global::System.Windows.MessageBoxButton.OK, 
+                result.Success ? global::System.Windows.MessageBoxImage.Information : global::System.Windows.MessageBoxImage.Warning);
             
             StatusText = result.Success ? "Self-test passed" : "Self-test failed";
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Self-test error: {ex.Message}", "Error", 
-                MessageBoxButton.OK, MessageBoxImage.Error);
+            global::System.Windows.MessageBox.Show($"Self-test error: {ex.Message}", "Error", 
+                global::System.Windows.MessageBoxButton.OK, global::System.Windows.MessageBoxImage.Error);
             StatusText = "Self-test error";
         }
     }
 
     private void ShowPreferences()
     {
-        MessageBox.Show("Preferences dialog - to be implemented", "Preferences", 
-            MessageBoxButton.OK, MessageBoxImage.Information);
+        global::System.Windows.MessageBox.Show("Preferences dialog - to be implemented", "Preferences", 
+            global::System.Windows.MessageBoxButton.OK, global::System.Windows.MessageBoxImage.Information);
     }
 
     private void ShowAbout()
     {
         var version = typeof(MainViewModel).Assembly.GetName().Version;
-        MessageBox.Show(
+        global::System.Windows.MessageBox.Show(
             $"BrokenArrow SkinLab\nVersion {version}\n\n" +
             "A comprehensive WPF-based GUI skinning application\n" +
             "modeled after KnobMan and SkinMan.\n\n" +
             "© 2026 Broken Arrow Software",
             "About BrokenArrow SkinLab",
-            MessageBoxButton.OK,
-            MessageBoxImage.Information);
+            global::System.Windows.MessageBoxButton.OK,
+            global::System.Windows.MessageBoxImage.Information);
     }
 
     #endregion
