@@ -4,6 +4,7 @@
 #include "../IO/ImageImporter.h"
 #include "../IO/ImageExporter.h"
 #include "../Canvas/FilmstripGenerator.h"
+#include "../Canvas/LayerRenderer.h"
 
 namespace KnobSmith
 {
@@ -357,25 +358,11 @@ void MainComponent::handleFileExportPNG()
         auto file = chooser.getResult().withFileExtension(".png");
         auto layers = project.getLayers();
         
-        std::vector<const juce::Image*> images;
-        for (auto* layer : layers)
-        {
-            if (layer && layer->isVisible())
-                images.push_back(&layer->getImage());
-        }
-        
-        // Composite all visible layers
-        juce::Image composited(juce::Image::ARGB, project.getCanvasWidth(), project.getCanvasHeight(), true);
-        juce::Graphics g(composited);
-        
-        for (auto* layer : layers)
-        {
-            if (layer && layer->isVisible() && layer->getImage().isValid())
-            {
-                g.setOpacity(layer->getOpacity());
-                g.drawImageAt(layer->getImage(), 0, 0);
-            }
-        }
+        // Use LayerRenderer to composite all visible layers
+        auto composited = LayerRenderer::renderLayers(layers, 
+                                                      project.getCanvasWidth(), 
+                                                      project.getCanvasHeight(),
+                                                      project.getBackgroundColour());
         
         if (ImageExporter::exportPNG(composited, file, 
                                      project.getExportSettings().getTransparentBackground(),

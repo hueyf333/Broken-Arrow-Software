@@ -102,6 +102,15 @@ juce::Point<int> CanvasComponent::canvasToScreen(juce::Point<int> point) const
     return {x, y};
 }
 
+juce::MouseEvent CanvasComponent::transformMouseEvent(const juce::MouseEvent& e, juce::Point<int> canvasPos) const
+{
+    return juce::MouseEvent(e.source, e.position, e.mods, e.pressure,
+                           e.orientation, e.rotation, e.tiltX, e.tiltY,
+                           e.eventComponent, e.originalComponent, e.eventTime,
+                           juce::Point<float>(canvasPos.x, canvasPos.y),
+                           e.eventTime, 1, false);
+}
+
 void CanvasComponent::mouseDown(const juce::MouseEvent& e)
 {
     if (e.mods.isMiddleButtonDown() || (e.mods.isLeftButtonDown() && e.mods.isCommandDown()))
@@ -116,11 +125,7 @@ void CanvasComponent::mouseDown(const juce::MouseEvent& e)
     if (activeTool && activeLayer && e.mods.isLeftButtonDown())
     {
         auto canvasPos = screenToCanvas(e.getPosition());
-        juce::MouseEvent transformedEvent(e.source, e.position, e.mods, e.pressure, 
-                                         e.orientation, e.rotation, e.tiltX, e.tiltY,
-                                         e.eventComponent, e.originalComponent, e.eventTime,
-                                         juce::Point<float>(canvasPos.x, canvasPos.y),
-                                         e.eventTime, 1, false);
+        auto transformedEvent = transformMouseEvent(e, canvasPos);
         activeTool->mouseDown(transformedEvent, activeLayer->getImage());
         repaint();
     }
@@ -139,11 +144,7 @@ void CanvasComponent::mouseDrag(const juce::MouseEvent& e)
     if (activeTool && activeLayer && e.mods.isLeftButtonDown())
     {
         auto canvasPos = screenToCanvas(e.getPosition());
-        juce::MouseEvent transformedEvent(e.source, e.position, e.mods, e.pressure,
-                                         e.orientation, e.rotation, e.tiltX, e.tiltY,
-                                         e.eventComponent, e.originalComponent, e.eventTime,
-                                         juce::Point<float>(canvasPos.x, canvasPos.y),
-                                         e.eventTime, 1, false);
+        auto transformedEvent = transformMouseEvent(e, canvasPos);
         activeTool->mouseDrag(transformedEvent, activeLayer->getImage());
         repaint();
     }
@@ -167,11 +168,7 @@ void CanvasComponent::mouseUp(const juce::MouseEvent& e)
     if (activeTool && activeLayer)
     {
         auto canvasPos = screenToCanvas(e.getPosition());
-        juce::MouseEvent transformedEvent(e.source, e.position, e.mods, e.pressure,
-                                         e.orientation, e.rotation, e.tiltX, e.tiltY,
-                                         e.eventComponent, e.originalComponent, e.eventTime,
-                                         juce::Point<float>(canvasPos.x, canvasPos.y),
-                                         e.eventTime, 1, false);
+        auto transformedEvent = transformMouseEvent(e, canvasPos);
         activeTool->mouseUp(transformedEvent, activeLayer->getImage());
         repaint();
     }

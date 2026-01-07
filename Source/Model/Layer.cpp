@@ -68,7 +68,10 @@ std::unique_ptr<Layer> Layer::fromVar(const juce::var& data)
         int width = static_cast<int>(obj->getProperty("imageWidth"));
         int height = static_cast<int>(obj->getProperty("imageHeight"));
         
-        auto layer = std::make_unique<Layer>(name, type, width > 0 ? width : 512, height > 0 ? height : 512);
+        constexpr int defaultCanvasSize = 512;
+        auto layer = std::make_unique<Layer>(name, type, 
+                                             width > 0 ? width : defaultCanvasSize, 
+                                             height > 0 ? height : defaultCanvasSize);
         layer->setVisible(obj->getProperty("visible"));
         layer->setOpacity(obj->getProperty("opacity"));
         

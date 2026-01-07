@@ -56,6 +56,8 @@ private:
 
     juce::Point<int> canvasToScreen(juce::Point<int> point) const;
     juce::Point<int> screenToCanvas(juce::Point<int> point) const;
+    
+    juce::MouseEvent transformMouseEvent(const juce::MouseEvent& e, juce::Point<int> canvasPos) const;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CanvasComponent)
 };

@@ -1,4 +1,5 @@
 #include "ImageExporter.h"
+#include "../Canvas/FilmstripGenerator.h"
 
 namespace KnobSmith
 {
@@ -78,37 +79,38 @@ bool ImageExporter::exportFilmstrip(const Project& project, const juce::File& fi
 
     try
     {
-        const auto& config = project.getFilmstripConfig();
         const auto& exportSettings = project.getExportSettings();
-        
-        int frameWidth = config.getFrameWidth();
-        int frameHeight = config.getFrameHeight();
-        int frameCount = config.getFrameCount();
-        int padding = config.getPadding();
         int scale = exportSettings.getScaleMultiplier();
         
-        // Calculate filmstrip dimensions
-        int stripWidth, stripHeight;
-        if (config.getOrientation() == FilmstripOrientation::Vertical)
+        // Use FilmstripGenerator to create the filmstrip
+        auto filmstrip = FilmstripGenerator::generateFilmstrip(project);
+        
+        if (!filmstrip.isValid())
         {
-            stripWidth = (frameWidth + padding) * scale;
-            stripHeight = (frameHeight * frameCount + padding * (frameCount - 1)) * scale;
-        }
-        else
-        {
-            stripWidth = (frameWidth * frameCount + padding * (frameCount - 1)) * scale;
-            stripHeight = (frameHeight + padding) * scale;
+            lastError = "Failed to generate filmstrip";
+            return false;
         }
         
-        juce::Image filmstrip(juce::Image::ARGB, stripWidth, stripHeight, true);
+        // Apply export settings (scale)
+        if (scale > 1)
+        {
+            int newWidth = filmstrip.getWidth() * scale;
+            int newHeight = filmstrip.getHeight() * scale;
+            juce::Image scaledFilmstrip(juce::Image::ARGB, newWidth, newHeight, true);
+            juce::Graphics g(scaledFilmstrip);
+            g.drawImageTransformed(filmstrip, juce::AffineTransform::scale(static_cast<float>(scale)));
+            filmstrip = scaledFilmstrip;
+        }
         
+        // Apply background setting
         if (!exportSettings.getTransparentBackground())
         {
-            filmstrip.clear(filmstrip.getBounds(), juce::Colours::white);
+            juce::Image withBackground(juce::Image::ARGB, filmstrip.getWidth(), filmstrip.getHeight(), true);
+            withBackground.clear(withBackground.getBounds(), juce::Colours::white);
+            juce::Graphics g(withBackground);
+            g.drawImageAt(filmstrip, 0, 0);
+            filmstrip = withBackground;
         }
-        
-        // This is a placeholder - actual filmstrip generation would be done by FilmstripGenerator
-        // For now, just export an empty filmstrip structure
         
         juce::FileOutputStream stream(file);
         if (!stream.openedOk())

@@ -1,4 +1,5 @@
 #include "ImageUtils.h"
+#include <set>
 
 namespace KnobSmith
 {
@@ -123,9 +124,13 @@ void ImageUtils::floodFill(juce::Image& target, juce::Point<int> position, juce:
     if (targetColour == fillColour)
         return;
 
-    // Simple flood fill using stack-based approach
+    // Scanline flood fill using stack to prevent recursion issues
     std::vector<juce::Point<int>> stack;
+    stack.reserve(1000); // Pre-allocate to reduce allocations
     stack.push_back(position);
+
+    // Track visited pixels to prevent infinite loops
+    std::set<juce::Point<int>> visited;
 
     while (!stack.empty())
     {
@@ -135,15 +140,25 @@ void ImageUtils::floodFill(juce::Image& target, juce::Point<int> position, juce:
         if (!target.getBounds().contains(p))
             continue;
 
+        // Check if already visited
+        if (visited.find(p) != visited.end())
+            continue;
+        
+        visited.insert(p);
+
         if (getPixelColour(target, p.x, p.y) != targetColour)
             continue;
 
         setPixelColour(target, p.x, p.y, fillColour);
 
-        stack.push_back({p.x + 1, p.y});
-        stack.push_back({p.x - 1, p.y});
-        stack.push_back({p.x, p.y + 1});
-        stack.push_back({p.x, p.y - 1});
+        // Add adjacent pixels (limit stack size to prevent stack overflow)
+        if (stack.size() < 100000)
+        {
+            stack.push_back({p.x + 1, p.y});
+            stack.push_back({p.x - 1, p.y});
+            stack.push_back({p.x, p.y + 1});
+            stack.push_back({p.x, p.y - 1});
+        }
     }
 }
 
