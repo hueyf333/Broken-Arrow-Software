@@ -7,8 +7,8 @@ class KnobSmithApplication : public juce::JUCEApplication
 public:
     KnobSmithApplication() {}
 
-    const juce::String getApplicationName() override { return ProjectInfo::projectName; }
-    const juce::String getApplicationVersion() override { return ProjectInfo::versionString; }
+    const juce::String getApplicationName() override { return "KnobSmith"; }
+    const juce::String getApplicationVersion() override { return "1.0.0"; }
     bool moreThanOneInstanceAllowed() override { return true; }
 
     void initialise(const juce::String& commandLine) override
