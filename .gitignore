@@ -1,0 +1,37 @@
+# JUCE Build Artifacts
+Builds/
+JuceLibraryCode/
+
+# Visual Studio
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+.vs/
+Debug/
+Release/
+x64/
+*.suo
+*.user
+*.opensdf
+*.sdf
+*.db
+*.opendb
+
+# macOS
+.DS_Store
+*.xcodeproj/
+DerivedData/
+
+# Linux
+Makefile
+build/
+
+# IDEs
+.vscode/
+.idea/
+
+# Temp files
+*.tmp
+*.log
+*~

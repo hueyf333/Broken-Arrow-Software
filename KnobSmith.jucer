@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="KnbSmt" name="KnobSmith" projectType="guiapp" useAppConfig="0"
+              addUsingNamespaceToJuceHeader="1" displaySplashScreen="1" jucerFormatVersion="1"
+              cppLanguageStandard="20">
+  <MAINGROUP id="IUqz8U" name="KnobSmith">
+    <GROUP id="{5F4E8C9A-9B0A-8F3D-2E1C-4D6F5A8B9C0D}" name="Source">
+      <GROUP id="{8C9D0E1F-2A3B-4C5D-6E7F-8A9B0C1D2E3F}" name="App">
+        <FILE id="A01" name="Main.cpp" compile="1" resource="0" file="Source/App/Main.cpp"/>
+        <FILE id="A02" name="MainWindow.h" compile="0" resource="0" file="Source/App/MainWindow.h"/>
+        <FILE id="A03" name="MainWindow.cpp" compile="1" resource="0" file="Source/App/MainWindow.cpp"/>
+        <FILE id="A04" name="MenuBarModel.h" compile="0" resource="0" file="Source/App/MenuBarModel.h"/>
+        <FILE id="A05" name="MenuBarModel.cpp" compile="1" resource="0" file="Source/App/MenuBarModel.cpp"/>
+      </GROUP>
+      <GROUP id="{1F2E3D4C-5B6A-7890-ABCD-EF0123456789}" name="UI">
+        <FILE id="U01" name="MainComponent.h" compile="0" resource="0" file="Source/UI/MainComponent.h"/>
+        <FILE id="U02" name="MainComponent.cpp" compile="1" resource="0" file="Source/UI/MainComponent.cpp"/>
+        <FILE id="U03" name="ToolPanel.h" compile="0" resource="0" file="Source/UI/ToolPanel.h"/>
+        <FILE id="U04" name="ToolPanel.cpp" compile="1" resource="0" file="Source/UI/ToolPanel.cpp"/>
+        <FILE id="U05" name="LayerPanel.h" compile="0" resource="0" file="Source/UI/LayerPanel.h"/>
+        <FILE id="U06" name="LayerPanel.cpp" compile="1" resource="0" file="Source/UI/LayerPanel.cpp"/>
+        <FILE id="U07" name="PropertiesPanel.h" compile="0" resource="0" file="Source/UI/PropertiesPanel.h"/>
+        <FILE id="U08" name="PropertiesPanel.cpp" compile="1" resource="0" file="Source/UI/PropertiesPanel.cpp"/>
+        <FILE id="U09" name="StatusBar.h" compile="0" resource="0" file="Source/UI/StatusBar.h"/>
+        <FILE id="U10" name="StatusBar.cpp" compile="1" resource="0" file="Source/UI/StatusBar.cpp"/>
+        <FILE id="U11" name="AssetBrowser.h" compile="0" resource="0" file="Source/UI/AssetBrowser.h"/>
+        <FILE id="U12" name="AssetBrowser.cpp" compile="1" resource="0" file="Source/UI/AssetBrowser.cpp"/>
+        <FILE id="U13" name="CustomLookAndFeel.h" compile="0" resource="0" file="Source/UI/CustomLookAndFeel.h"/>
+        <FILE id="U14" name="CustomLookAndFeel.cpp" compile="1" resource="0" file="Source/UI/CustomLookAndFeel.cpp"/>
+      </GROUP>
+      <GROUP id="{2E3F4D5C-6A7B-8901-BCDE-F01234567890}" name="Canvas">
+        <FILE id="C01" name="CanvasComponent.h" compile="0" resource="0" file="Source/Canvas/CanvasComponent.h"/>
+        <FILE id="C02" name="CanvasComponent.cpp" compile="1" resource="0" file="Source/Canvas/CanvasComponent.cpp"/>
+        <FILE id="C03" name="LayerRenderer.h" compile="0" resource="0" file="Source/Canvas/LayerRenderer.h"/>
+        <FILE id="C04" name="LayerRenderer.cpp" compile="1" resource="0" file="Source/Canvas/LayerRenderer.cpp"/>
+        <FILE id="C05" name="FilmstripGenerator.h" compile="0" resource="0" file="Source/Canvas/FilmstripGenerator.h"/>
+        <FILE id="C06" name="FilmstripGenerator.cpp" compile="1" resource="0" file="Source/Canvas/FilmstripGenerator.cpp"/>
+        <FILE id="C07" name="GridOverlay.h" compile="0" resource="0" file="Source/Canvas/GridOverlay.h"/>
+        <FILE id="C08" name="GridOverlay.cpp" compile="1" resource="0" file="Source/Canvas/GridOverlay.cpp"/>
+      </GROUP>
+      <GROUP id="{3D4E5F6C-7A8B-9012-CDEF-012345678901}" name="Tools">
+        <FILE id="T01" name="Tool.h" compile="0" resource="0" file="Source/Tools/Tool.h"/>
+        <FILE id="T02" name="SelectTool.h" compile="0" resource="0" file="Source/Tools/SelectTool.h"/>
+        <FILE id="T03" name="SelectTool.cpp" compile="1" resource="0" file="Source/Tools/SelectTool.cpp"/>
+        <FILE id="T04" name="BrushTool.h" compile="0" resource="0" file="Source/Tools/BrushTool.h"/>
+        <FILE id="T05" name="BrushTool.cpp" compile="1" resource="0" file="Source/Tools/BrushTool.cpp"/>
+        <FILE id="T06" name="EraserTool.h" compile="0" resource="0" file="Source/Tools/EraserTool.h"/>
+        <FILE id="T07" name="EraserTool.cpp" compile="1" resource="0" file="Source/Tools/EraserTool.cpp"/>
+        <FILE id="T08" name="FillTool.h" compile="0" resource="0" file="Source/Tools/FillTool.h"/>
+        <FILE id="T09" name="FillTool.cpp" compile="1" resource="0" file="Source/Tools/FillTool.cpp"/>
+        <FILE id="T10" name="ShapeTool.h" compile="0" resource="0" file="Source/Tools/ShapeTool.h"/>
+        <FILE id="T11" name="ShapeTool.cpp" compile="1" resource="0" file="Source/Tools/ShapeTool.cpp"/>
+        <FILE id="T12" name="ColorPickerTool.h" compile="0" resource="0" file="Source/Tools/ColorPickerTool.h"/>
+        <FILE id="T13" name="ColorPickerTool.cpp" compile="1" resource="0" file="Source/Tools/ColorPickerTool.cpp"/>
+      </GROUP>
+      <GROUP id="{4E5F6D7C-8A9B-0123-DEFG-123456789012}" name="Model">
+        <FILE id="M01" name="Layer.h" compile="0" resource="0" file="Source/Model/Layer.h"/>
+        <FILE id="M02" name="Layer.cpp" compile="1" resource="0" file="Source/Model/Layer.cpp"/>
+        <FILE id="M03" name="Project.h" compile="0" resource="0" file="Source/Model/Project.h"/>
+        <FILE id="M04" name="Project.cpp" compile="1" resource="0" file="Source/Model/Project.cpp"/>
+        <FILE id="M05" name="FilmstripConfig.h" compile="0" resource="0" file="Source/Model/FilmstripConfig.h"/>
+        <FILE id="M06" name="FilmstripConfig.cpp" compile="1" resource="0" file="Source/Model/FilmstripConfig.cpp"/>
+        <FILE id="M07" name="ExportSettings.h" compile="0" resource="0" file="Source/Model/ExportSettings.h"/>
+        <FILE id="M08" name="ExportSettings.cpp" compile="1" resource="0" file="Source/Model/ExportSettings.cpp"/>
+      </GROUP>
+      <GROUP id="{5F6D7E8C-9A0B-1234-EFGH-234567890123}" name="IO">
+        <FILE id="I01" name="ProjectSerializer.h" compile="0" resource="0" file="Source/IO/ProjectSerializer.h"/>
+        <FILE id="I02" name="ProjectSerializer.cpp" compile="1" resource="0" file="Source/IO/ProjectSerializer.cpp"/>
+        <FILE id="I03" name="ImageImporter.h" compile="0" resource="0" file="Source/IO/ImageImporter.h"/>
+        <FILE id="I04" name="ImageImporter.cpp" compile="1" resource="0" file="Source/IO/ImageImporter.cpp"/>
+        <FILE id="I05" name="ImageExporter.h" compile="0" resource="0" file="Source/IO/ImageExporter.h"/>
+        <FILE id="I06" name="ImageExporter.cpp" compile="1" resource="0" file="Source/IO/ImageExporter.cpp"/>
+      </GROUP>
+      <GROUP id="{6D7E8F9C-0A1B-2345-FGHI-345678901234}" name="Commands">
+        <FILE id="CM01" name="CommandIDs.h" compile="0" resource="0" file="Source/Commands/CommandIDs.h"/>
+        <FILE id="CM02" name="CommandManager.h" compile="0" resource="0" file="Source/Commands/CommandManager.h"/>
+        <FILE id="CM03" name="CommandManager.cpp" compile="1" resource="0" file="Source/Commands/CommandManager.cpp"/>
+        <FILE id="CM04" name="UndoableCommand.h" compile="0" resource="0" file="Source/Commands/UndoableCommand.h"/>
+        <FILE id="CM05" name="UndoableCommand.cpp" compile="1" resource="0" file="Source/Commands/UndoableCommand.cpp"/>
+      </GROUP>
+      <GROUP id="{7E8F9D0C-1A2B-3456-GHIJ-456789012345}" name="Utils">
+        <FILE id="UT01" name="RecentFiles.h" compile="0" resource="0" file="Source/Utils/RecentFiles.h"/>
+        <FILE id="UT02" name="RecentFiles.cpp" compile="1" resource="0" file="Source/Utils/RecentFiles.cpp"/>
+        <FILE id="UT03" name="ImageUtils.h" compile="0" resource="0" file="Source/Utils/ImageUtils.h"/>
+        <FILE id="UT04" name="ImageUtils.cpp" compile="1" resource="0" file="Source/Utils/ImageUtils.cpp"/>
+        <FILE id="UT05" name="GeometryUtils.h" compile="0" resource="0" file="Source/Utils/GeometryUtils.h"/>
+        <FILE id="UT06" name="GeometryUtils.cpp" compile="1" resource="0" file="Source/Utils/GeometryUtils.cpp"/>
+      </GROUP>
+    </GROUP>
+  </MAINGROUP>
+  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
+  <EXPORTFORMATS>
+    <VS2022 targetFolder="Builds/VisualStudio2022">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="KnobSmith"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="KnobSmith"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_core" path=""/>
+        <MODULEPATH id="juce_data_structures" path=""/>
+        <MODULEPATH id="juce_events" path=""/>
+        <MODULEPATH id="juce_graphics" path=""/>
+        <MODULEPATH id="juce_gui_basics" path=""/>
+        <MODULEPATH id="juce_gui_extra" path=""/>
+      </MODULEPATHS>
+    </VS2022>
+  </EXPORTFORMATS>
+  <MODULES>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+  </MODULES>
+</JUCERPROJECT>
