@@ -1,0 +1,52 @@
+{
+    "version": 1,
+    "projectName": "Sample Knob",
+    "knobParameters": {
+        "canvasWidth": 128,
+        "canvasHeight": 128,
+        "frameCount": 64,
+        "startAngle": -135,
+        "endAngle": 135,
+        "innerRadius": 30,
+        "outerRadius": 50,
+        "tickCount": 11,
+        "tickStyle": "Line",
+        "pointerStyle": "Line",
+        "enableShadow": true,
+        "shadowBlur": 10,
+        "shadowOpacity": 0.5,
+        "layers": [
+            {
+                "name": "Base",
+                "color": "#6496c8",
+                "gradientColor": "#2050a0",
+                "useGradient": true,
+                "opacity": 1.0,
+                "visible": true,
+                "order": 0
+            }
+        ]
+    },
+    "layoutParameters": {
+        "width": 800,
+        "height": 600,
+        "gridSize": 10,
+        "snapToGrid": true,
+        "controls": [
+            {
+                "id": "volume_knob",
+                "name": "Volume",
+                "type": 0,
+                "x": 100,
+                "y": 100,
+                "width": 128,
+                "height": 128,
+                "imageSource": "volume_knob.png",
+                "isFilmstrip": true,
+                "frameCount": 64,
+                "hitTestShape": "Ellipse",
+                "metadata": {}
+            }
+        ]
+    }
+}
