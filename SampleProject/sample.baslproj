@@ -1,0 +1,13 @@
+{
+  "canvasWidth": 128,
+  "canvasHeight": 128,
+  "frameCount": 64,
+  "minAngle": -135,
+  "maxAngle": 135,
+  "tickCount": 11,
+  "pointerStyle": "Line",
+  "gridEnabled": true,
+  "gridSize": 10,
+  "snapEnabled": true,
+  "zoom": 1
+}
