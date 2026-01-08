@@ -1,0 +1,9 @@
+{
+  "name": "Animated Rotary Knob",
+  "canvasWidth": 256,
+  "canvasHeight": 256,
+  "frameCount": 64,
+  "currentFrame": 0,
+  "frameRate": 30,
+  "frames": []
+}
