@@ -1,0 +1,273 @@
+{
+  "Name": "Sample Audio Plugin Skin",
+  "Version": "1.0.0",
+  "Created": "2026-01-07T22:00:00Z",
+  "Modified": "2026-01-07T22:00:00Z",
+  "Knobs": [
+    {
+      "Id": "knob-001",
+      "Name": "Volume Knob",
+      "FrameCount": 64,
+      "StartAngle": -135.0,
+      "EndAngle": 135.0,
+      "Width": 64,
+      "Height": 64,
+      "Layers": [
+        {
+          "Id": "layer-001",
+          "Name": "Background",
+          "Type": "Background",
+          "Visible": true,
+          "Opacity": 1.0,
+          "BlendMode": "Normal",
+          "Color": {
+            "R": 60,
+            "G": 60,
+            "B": 60,
+            "A": 255
+          },
+          "Gradient": {
+            "Stops": [
+              {
+                "Offset": 0.0,
+                "Color": {
+                  "R": 80,
+                  "G": 80,
+                  "B": 80,
+                  "A": 255
+                }
+              },
+              {
+                "Offset": 1.0,
+                "Color": {
+                  "R": 40,
+                  "G": 40,
+                  "B": 40,
+                  "A": 255
+                }
+              }
+            ],
+            "Type": "Radial",
+            "Angle": 0.0
+          },
+          "BlurRadius": 0.0,
+          "Properties": {}
+        },
+        {
+          "Id": "layer-002",
+          "Name": "Ring",
+          "Type": "Ring",
+          "Visible": true,
+          "Opacity": 1.0,
+          "BlendMode": "Normal",
+          "Color": {
+            "R": 120,
+            "G": 120,
+            "B": 120,
+            "A": 255
+          },
+          "BlurRadius": 0.0,
+          "Properties": {}
+        },
+        {
+          "Id": "layer-003",
+          "Name": "Ticks",
+          "Type": "Ticks",
+          "Visible": true,
+          "Opacity": 1.0,
+          "BlendMode": "Normal",
+          "Color": {
+            "R": 200,
+            "G": 200,
+            "B": 200,
+            "A": 255
+          },
+          "BlurRadius": 0.0,
+          "Properties": {}
+        },
+        {
+          "Id": "layer-004",
+          "Name": "Pointer",
+          "Type": "Pointer",
+          "Visible": true,
+          "Opacity": 1.0,
+          "BlendMode": "Normal",
+          "Color": {
+            "R": 255,
+            "G": 100,
+            "B": 50,
+            "A": 255
+          },
+          "BlurRadius": 0.0,
+          "Properties": {}
+        },
+        {
+          "Id": "layer-005",
+          "Name": "Gloss",
+          "Type": "Gloss",
+          "Visible": true,
+          "Opacity": 0.3,
+          "BlendMode": "Screen",
+          "Color": {
+            "R": 255,
+            "G": 255,
+            "B": 255,
+            "A": 255
+          },
+          "BlurRadius": 0.0,
+          "Properties": {}
+        }
+      ]
+    },
+    {
+      "Id": "knob-002",
+      "Name": "Pan Knob",
+      "FrameCount": 64,
+      "StartAngle": -135.0,
+      "EndAngle": 135.0,
+      "Width": 64,
+      "Height": 64,
+      "Layers": [
+        {
+          "Id": "layer-006",
+          "Name": "Background",
+          "Type": "Background",
+          "Visible": true,
+          "Opacity": 1.0,
+          "BlendMode": "Normal",
+          "Color": {
+            "R": 50,
+            "G": 80,
+            "B": 120,
+            "A": 255
+          },
+          "BlurRadius": 0.0,
+          "Properties": {}
+        },
+        {
+          "Id": "layer-007",
+          "Name": "Pointer",
+          "Type": "Pointer",
+          "Visible": true,
+          "Opacity": 1.0,
+          "BlendMode": "Normal",
+          "Color": {
+            "R": 100,
+            "G": 200,
+            "B": 255,
+            "A": 255
+          },
+          "BlurRadius": 0.0,
+          "Properties": {}
+        }
+      ]
+    }
+  ],
+  "Layouts": [
+    {
+      "Id": "layout-001",
+      "Name": "Main Plugin Interface",
+      "Width": 800,
+      "Height": 600,
+      "Controls": [
+        {
+          "Id": "control-001",
+          "Name": "Volume Knob",
+          "Type": "Knob",
+          "Bounds": {
+            "X": 50.0,
+            "Y": 50.0,
+            "Width": 64.0,
+            "Height": 64.0
+          },
+          "StateImages": [],
+          "Metadata": {
+            "parameter": "volume",
+            "min": "0.0",
+            "max": "1.0",
+            "default": "0.75"
+          },
+          "HitTestShape": "Ellipse"
+        },
+        {
+          "Id": "control-002",
+          "Name": "Pan Knob",
+          "Type": "Knob",
+          "Bounds": {
+            "X": 150.0,
+            "Y": 50.0,
+            "Width": 64.0,
+            "Height": 64.0
+          },
+          "StateImages": [],
+          "Metadata": {
+            "parameter": "pan",
+            "min": "-1.0",
+            "max": "1.0",
+            "default": "0.0"
+          },
+          "HitTestShape": "Ellipse"
+        },
+        {
+          "Id": "control-003",
+          "Name": "Gain Slider",
+          "Type": "SliderHorizontal",
+          "Bounds": {
+            "X": 250.0,
+            "Y": 50.0,
+            "Width": 200.0,
+            "Height": 32.0
+          },
+          "StateImages": [],
+          "Metadata": {
+            "parameter": "gain",
+            "min": "0.0",
+            "max": "2.0",
+            "default": "1.0"
+          },
+          "HitTestShape": "Rectangle"
+        },
+        {
+          "Id": "control-004",
+          "Name": "Bypass Button",
+          "Type": "ButtonToggle",
+          "Bounds": {
+            "X": 500.0,
+            "Y": 50.0,
+            "Width": 64.0,
+            "Height": 32.0
+          },
+          "StateImages": [],
+          "Metadata": {
+            "parameter": "bypass",
+            "states": "2"
+          },
+          "HitTestShape": "Rectangle"
+        },
+        {
+          "Id": "control-005",
+          "Name": "Level Meter",
+          "Type": "LEDMeter",
+          "Bounds": {
+            "X": 700.0,
+            "Y": 50.0,
+            "Width": 80.0,
+            "Height": 200.0
+          },
+          "StateImages": [],
+          "Metadata": {
+            "segments": "20",
+            "orientation": "vertical"
+          },
+          "HitTestShape": "Rectangle"
+        }
+      ]
+    }
+  ],
+  "Settings": {
+    "GridSize": 10,
+    "AutosaveInterval": 300,
+    "DefaultExportFolder": "Exports",
+    "Theme": "Light"
+  }
+}

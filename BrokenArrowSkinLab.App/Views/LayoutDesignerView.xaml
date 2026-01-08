@@ -1,0 +1,132 @@
+<UserControl
+    x:Class="BrokenArrowSkinLab.App.Views.LayoutDesignerView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BrokenArrowSkinLab.App.Views"
+    xmlns:vm="using:BrokenArrowSkinLab.App.ViewModels"
+    Background="{ThemeResource SystemControlBackgroundAltHighBrush}">
+
+    <UserControl.DataContext>
+        <vm:LayoutDesignerViewModel />
+    </UserControl.DataContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Left Panel - Toolbox -->
+        <Grid Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Background="{ThemeResource SystemControlBackgroundBaseLowBrush}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="Control Toolbox" FontWeight="Bold" Margin="8"
+                      Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+
+            <StackPanel Grid.Row="1" Margin="8" Spacing="4">
+                <Button Content="Add Knob" Command="{Binding AddKnobCommand}" HorizontalAlignment="Stretch"
+                       Style="{ThemeResource AccentButtonStyle}"/>
+                <Button Content="Add Slider (H)" Command="{Binding AddSliderHCommand}" HorizontalAlignment="Stretch"/>
+                <Button Content="Add Slider (V)" Command="{Binding AddSliderVCommand}" HorizontalAlignment="Stretch"/>
+                <Button Content="Add Button" Command="{Binding AddButtonCommand}" HorizontalAlignment="Stretch"/>
+                <Button Content="Add Switch" Command="{Binding AddSwitchCommand}" HorizontalAlignment="Stretch"/>
+                <Button Content="Add LED Meter" Command="{Binding AddMeterCommand}" HorizontalAlignment="Stretch"/>
+                <MenuFlyoutSeparator Margin="0,8"/>
+                <Button Content="Remove Control" Command="{Binding RemoveControlCommand}" HorizontalAlignment="Stretch"/>
+                <Button Content="Duplicate" Command="{Binding DuplicateControlCommand}" HorizontalAlignment="Stretch"/>
+            </StackPanel>
+
+            <TextBlock Grid.Row="2" Text="Controls" FontWeight="Bold" Margin="8,16,8,8"
+                      Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+
+            <ListBox Grid.Row="3"
+                     ItemsSource="{Binding Controls}"
+                     SelectedItem="{Binding SelectedControl, Mode=TwoWay}"
+                     DisplayMemberPath="Name"
+                     Margin="8"
+                     Background="{ThemeResource SystemControlBackgroundAltHighBrush}"
+                     Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+        </Grid>
+
+        <!-- Center Panel - Canvas -->
+        <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Background="{ThemeResource SystemControlBackgroundBaseLowBrush}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <CommandBar Grid.Row="0" Background="{ThemeResource SystemControlBackgroundAltHighBrush}" DefaultLabelPosition="Right">
+                <AppBarButton Icon="ZoomIn" Label="Zoom In" Command="{Binding ZoomInCommand}"/>
+                <AppBarButton Icon="ZoomOut" Label="Zoom Out" Command="{Binding ZoomOutCommand}"/>
+                <AppBarButton Icon="Zoom" Label="Fit" Command="{Binding ZoomFitCommand}"/>
+                <AppBarSeparator/>
+                <AppBarToggleButton Icon="ViewAll" Label="Grid" IsChecked="{Binding ShowGrid, Mode=TwoWay}"/>
+                <AppBarSeparator/>
+                <AppBarElementContainer VerticalAlignment="Center">
+                    <TextBlock VerticalAlignment="Center" Margin="8,0"
+                              Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}">
+                        <Run Text="Zoom: "/>
+                        <Run Text="{Binding ZoomLevel, Mode=OneWay}"/>
+                        <Run Text="x"/>
+                    </TextBlock>
+                </AppBarElementContainer>
+            </CommandBar>
+
+            <Border Grid.Row="1" BorderBrush="{ThemeResource SystemControlForegroundBaseMediumBrush}" 
+                   BorderThickness="1" Background="#252526" Margin="8">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
+                             ZoomMode="Disabled">
+                    <Canvas Width="800" Height="600" Background="#2D2D30">
+                        <Canvas.RenderTransform>
+                            <ScaleTransform ScaleX="{Binding ZoomLevel}" ScaleY="{Binding ZoomLevel}"/>
+                        </Canvas.RenderTransform>
+
+                        <!-- Grid Background (simplified for WinUI) -->
+                        <Rectangle Width="800" Height="600" Opacity="{Binding ShowGrid}">
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="#333337"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                        <!-- Controls will be rendered here -->
+                        <!-- Note: WinUI Canvas binding is different from WPF, simplified for now -->
+                    </Canvas>
+                </ScrollViewer>
+            </Border>
+        </Grid>
+
+        <!-- Status Bar -->
+        <Grid Grid.Row="2" Grid.Column="1" Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}" Height="24">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Text="{Binding StatusText}" 
+                      VerticalAlignment="Center" Margin="8,0"
+                      Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="8,0">
+                <TextBlock Text="Layout: " VerticalAlignment="Center"
+                          Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                <TextBlock VerticalAlignment="Center"
+                          Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
+                    <Run Text="{Binding CurrentLayout.Width, Mode=OneWay, FallbackValue=800}"/>
+                    <Run Text=" x "/>
+                    <Run Text="{Binding CurrentLayout.Height, Mode=OneWay, FallbackValue=600}"/>
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

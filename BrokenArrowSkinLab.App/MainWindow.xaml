@@ -1,0 +1,219 @@
+﻿<Window
+    x:Class="BrokenArrowSkinLab.App.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BrokenArrowSkinLab.App"
+    xmlns:vm="using:BrokenArrowSkinLab.App.ViewModels"
+    xmlns:views="using:BrokenArrowSkinLab.App.Views"
+    Title="BrokenArrow SkinLab">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.DataContext>
+            <vm:MainViewModel />
+        </Grid.DataContext>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Menu Bar -->
+        <MenuBar Grid.Row="0" Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+            <MenuBarItem Title="File">
+                <MenuFlyoutItem Text="New Project" Command="{Binding NewProjectCommand}"/>
+                <MenuFlyoutItem Text="Open Project..." Command="{Binding OpenProjectCommand}"/>
+                <MenuFlyoutSeparator/>
+                <MenuFlyoutItem Text="Save" Command="{Binding SaveProjectCommand}"/>
+                <MenuFlyoutItem Text="Save As..." Command="{Binding SaveProjectAsCommand}"/>
+                <MenuFlyoutSeparator/>
+                <MenuFlyoutItem Text="Exit" Command="{Binding ExitCommand}"/>
+            </MenuBarItem>
+            
+            <MenuBarItem Title="Edit">
+                <MenuFlyoutItem Text="Undo" Command="{Binding UndoCommand}"/>
+                <MenuFlyoutItem Text="Redo" Command="{Binding RedoCommand}"/>
+                <MenuFlyoutSeparator/>
+                <MenuFlyoutItem Text="Cut" Command="{Binding CutCommand}"/>
+                <MenuFlyoutItem Text="Copy" Command="{Binding CopyCommand}"/>
+                <MenuFlyoutItem Text="Paste" Command="{Binding PasteCommand}"/>
+                <MenuFlyoutItem Text="Delete" Command="{Binding DeleteCommand}"/>
+                <MenuFlyoutSeparator/>
+                <MenuFlyoutItem Text="Preferences..." Command="{Binding PreferencesCommand}"/>
+            </MenuBarItem>
+            
+            <MenuBarItem Title="View">
+                <MenuFlyoutItem Text="Zoom In"/>
+                <MenuFlyoutItem Text="Zoom Out"/>
+                <MenuFlyoutItem Text="Zoom to Fit"/>
+                <MenuFlyoutSeparator/>
+                <ToggleMenuFlyoutItem Text="Show Grid" IsChecked="True"/>
+                <ToggleMenuFlyoutItem Text="Show Rulers"/>
+            </MenuBarItem>
+            
+            <MenuBarItem Title="Tools">
+                <MenuFlyoutItem Text="New Knob" Command="{Binding NewKnobCommand}"/>
+                <MenuFlyoutItem Text="New Layout" Command="{Binding NewLayoutCommand}"/>
+                <MenuFlyoutSeparator/>
+                <MenuFlyoutItem Text="Run Self Test" Command="{Binding RunSelfTestCommand}"/>
+            </MenuBarItem>
+            
+            <MenuBarItem Title="Help">
+                <MenuFlyoutItem Text="Documentation"/>
+                <MenuFlyoutItem Text="About..." Command="{Binding AboutCommand}"/>
+            </MenuBarItem>
+        </MenuBar>
+
+        <!-- Toolbar -->
+        <CommandBar Grid.Row="1" Background="{ThemeResource SystemControlBackgroundAltHighBrush}" DefaultLabelPosition="Right">
+            <AppBarButton Icon="Page" Label="New" Command="{Binding NewProjectCommand}" ToolTipService.ToolTip="New Project (Ctrl+N)"/>
+            <AppBarButton Icon="OpenFile" Label="Open" Command="{Binding OpenProjectCommand}" ToolTipService.ToolTip="Open Project (Ctrl+O)"/>
+            <AppBarButton Icon="Save" Label="Save" Command="{Binding SaveProjectCommand}" ToolTipService.ToolTip="Save Project (Ctrl+S)"/>
+            <AppBarSeparator/>
+            <AppBarButton Icon="Undo" Label="Undo" Command="{Binding UndoCommand}" ToolTipService.ToolTip="Undo (Ctrl+Z)"/>
+            <AppBarButton Icon="Redo" Label="Redo" Command="{Binding RedoCommand}" ToolTipService.ToolTip="Redo (Ctrl+Y)"/>
+            <AppBarSeparator/>
+            <AppBarButton Icon="Add" Label="New Knob" Command="{Binding NewKnobCommand}" ToolTipService.ToolTip="Create New Knob"/>
+            <AppBarButton Icon="View" Label="New Layout" Command="{Binding NewLayoutCommand}" ToolTipService.ToolTip="Create New Layout"/>
+        </CommandBar>
+
+        <!-- Main Content Area -->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="300"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Left Panel - Project Explorer -->
+            <Grid Grid.Column="0" Background="{ThemeResource SystemControlBackgroundAltHighBrush}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="Project Explorer" FontWeight="Bold" 
+                          Margin="8" Padding="4"
+                          Background="{ThemeResource SystemControlBackgroundBaseLowBrush}"
+                          Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+
+                <Pivot Grid.Row="1">
+                    <PivotItem Header="Knobs">
+                        <ListView ItemsSource="{Binding Knobs}" DisplayMemberPath="Name"
+                                 Background="{ThemeResource SystemControlBackgroundAltHighBrush}"
+                                 Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+                    </PivotItem>
+                    <PivotItem Header="Layouts">
+                        <ListView ItemsSource="{Binding Layouts}" DisplayMemberPath="Name"
+                                 Background="{ThemeResource SystemControlBackgroundAltHighBrush}"
+                                 Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+                    </PivotItem>
+                </Pivot>
+            </Grid>
+
+            <Border Grid.Column="1" Width="1" Background="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+
+            <!-- Center Panel - Workspace -->
+            <Grid Grid.Column="2" Background="{ThemeResource SystemControlBackgroundBaseLowBrush}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="Workspace" FontWeight="Bold" 
+                          Margin="8" Padding="4"
+                          Background="{ThemeResource SystemControlBackgroundBaseLowBrush}"
+                          Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+
+                <TabView Grid.Row="1">
+                    <TabView.TabItems>
+                        <TabViewItem Header="Knob Designer">
+                            <views:KnobDesignerView DataContext="{Binding KnobDesigner}"/>
+                        </TabViewItem>
+                        <TabViewItem Header="Skin Layout Designer">
+                            <views:LayoutDesignerView DataContext="{Binding LayoutDesigner}"/>
+                        </TabViewItem>
+                    </TabView.TabItems>
+                </TabView>
+            </Grid>
+
+            <Border Grid.Column="3" Width="1" Background="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+
+            <!-- Right Panel - Properties Inspector -->
+            <Grid Grid.Column="4" Background="{ThemeResource SystemControlBackgroundAltHighBrush}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="Properties" FontWeight="Bold" 
+                          Margin="8" Padding="4"
+                          Background="{ThemeResource SystemControlBackgroundBaseLowBrush}"
+                          Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                    <StackPanel Margin="10" Spacing="8">
+                        <TextBlock Text="Project Properties" FontWeight="Bold" 
+                                  Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+
+                        <TextBlock Text="Name:" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                        <TextBox Text="{Binding CurrentProject.Name, Mode=TwoWay}" 
+                                Background="{ThemeResource SystemControlBackgroundBaseLowBrush}"
+                                Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+
+                        <TextBlock Text="Version:" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                        <TextBox Text="{Binding CurrentProject.Version, Mode=TwoWay}"
+                                Background="{ThemeResource SystemControlBackgroundBaseLowBrush}"
+                                Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+
+                        <TextBlock Text="Created:" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                        <TextBlock Text="{Binding CurrentProject.Created}" 
+                                  Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+
+                        <TextBlock Text="Modified:" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                        <TextBlock Text="{Binding CurrentProject.Modified}" 
+                                  Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+
+                        <MenuFlyoutSeparator/>
+
+                        <TextBlock Text="Settings" FontWeight="Bold" 
+                                  Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+
+                        <TextBlock Text="Grid Size:" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                        <NumberBox Value="{Binding CurrentProject.Settings.GridSize, Mode=TwoWay}"
+                                  Minimum="1" Maximum="100"
+                                  Background="{ThemeResource SystemControlBackgroundBaseLowBrush}"
+                                  Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+
+                        <TextBlock Text="Theme:" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                        <ComboBox SelectedValue="{Binding CurrentProject.Settings.Theme, Mode=TwoWay}"
+                                 Background="{ThemeResource SystemControlBackgroundBaseLowBrush}"
+                                 Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}">
+                            <ComboBoxItem Content="Light"/>
+                            <ComboBoxItem Content="Dark" IsSelected="True"/>
+                        </ComboBox>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+
+        <!-- Status Bar -->
+        <Grid Grid.Row="3" Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}" Height="24">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Text="{Binding StatusText}" 
+                      VerticalAlignment="Center" Margin="8,0"
+                      Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+
+            <TextBlock Grid.Column="1" Text="Ready" 
+                      VerticalAlignment="Center" Margin="8,0"
+                      Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+        </Grid>
+    </Grid>
+</Window>
