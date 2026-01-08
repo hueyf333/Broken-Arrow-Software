@@ -6,9 +6,9 @@ using BrokenArrowSkinLab.Core.IO;
 using BrokenArrowSkinLab.Core.Services;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Windows;
+using Microsoft.UI.Xaml;
 using System.Windows.Input;
-using Microsoft.Win32;
+using Windows.Storage.Pickers;
 
 namespace BrokenArrowSkinLab.App.ViewModels;
 
@@ -129,7 +129,7 @@ public class MainViewModel : ViewModelBase
         OpenProjectCommand = new RelayCommand(async _ => await OpenProjectAsync());
         SaveProjectCommand = new RelayCommand(async _ => await SaveProjectAsync(), _ => IsDirty);
         SaveProjectAsCommand = new RelayCommand(async _ => await SaveProjectAsAsync());
-        ExitCommand = new RelayCommand(_ => global::System.Windows.Application.Current.Shutdown());
+        ExitCommand = new RelayCommand(_ => Microsoft.UI.Xaml.Application.Current.Exit());
 
         // Edit menu
         UndoCommand = new RelayCommand(_ => _undoRedoService.Undo(), _ => _undoRedoService.CanUndo);
@@ -179,7 +179,7 @@ public class MainViewModel : ViewModelBase
         if (!CheckSaveChanges())
             return;
 
-        var dialog = new Microsoft.Win32.OpenFileDialog
+        var dialog = new Windows.Storage.Pickers.FileOpenPicker
         {
             Filter = "BrokenArrow SkinLab Project (*.baslproj)|*.baslproj|All Files (*.*)|*.*",
             Title = "Open Project"
@@ -207,8 +207,8 @@ public class MainViewModel : ViewModelBase
             }
             catch (Exception ex)
             {
-                global::System.Windows.MessageBox.Show($"Error opening project: {ex.Message}", "Error", 
-                    global::System.Windows.MessageBoxButton.OK, global::System.Windows.MessageBoxImage.Error);
+                ContentDialog.Show($"Error opening project: {ex.Message}", "Error", 
+                    ContentDialogButton.OK, ContentDialogImage.Error);
             }
         }
     }
@@ -231,14 +231,14 @@ public class MainViewModel : ViewModelBase
         }
         catch (Exception ex)
         {
-            global::System.Windows.MessageBox.Show($"Error saving project: {ex.Message}", "Error", 
-                global::System.Windows.MessageBoxButton.OK, global::System.Windows.MessageBoxImage.Error);
+            ContentDialog.Show($"Error saving project: {ex.Message}", "Error", 
+                ContentDialogButton.OK, ContentDialogImage.Error);
         }
     }
 
     private async Task SaveProjectAsAsync()
     {
-        var dialog = new Microsoft.Win32.SaveFileDialog
+        var dialog = new Windows.Storage.Pickers.FileSavePicker
         {
             Filter = "BrokenArrow SkinLab Project (*.baslproj)|*.baslproj|All Files (*.*)|*.*",
             Title = "Save Project As",
@@ -257,16 +257,16 @@ public class MainViewModel : ViewModelBase
         if (!IsDirty)
             return true;
 
-        var result = global::System.Windows.MessageBox.Show(
+        var result = ContentDialog.Show(
             "Do you want to save changes to the current project?",
             "Save Changes",
-            global::System.Windows.MessageBoxButton.YesNoCancel,
-            global::System.Windows.MessageBoxImage.Question);
+            ContentDialogButton.YesNoCancel,
+            ContentDialogImage.Question);
 
-        if (result == global::System.Windows.MessageBoxResult.Cancel)
+        if (result == ContentDialogResult.Cancel)
             return false;
 
-        if (result == global::System.Windows.MessageBoxResult.Yes)
+        if (result == ContentDialogResult.Yes)
         {
             SaveProjectAsync().Wait();
         }
@@ -322,37 +322,37 @@ public class MainViewModel : ViewModelBase
                 ? $"Self-test completed successfully!\n\nPassed: {result.TestsPassed}/{result.TotalTests}\n\n{result.Log}"
                 : $"Self-test failed!\n\nPassed: {result.TestsPassed}/{result.TotalTests}\n\n{result.Log}";
 
-            global::System.Windows.MessageBox.Show(message, "Self-Test Results", 
-                global::System.Windows.MessageBoxButton.OK, 
-                result.Success ? global::System.Windows.MessageBoxImage.Information : global::System.Windows.MessageBoxImage.Warning);
+            ContentDialog.Show(message, "Self-Test Results", 
+                ContentDialogButton.OK, 
+                result.Success ? ContentDialogImage.Information : ContentDialogImage.Warning);
             
             StatusText = result.Success ? "Self-test passed" : "Self-test failed";
         }
         catch (Exception ex)
         {
-            global::System.Windows.MessageBox.Show($"Self-test error: {ex.Message}", "Error", 
-                global::System.Windows.MessageBoxButton.OK, global::System.Windows.MessageBoxImage.Error);
+            ContentDialog.Show($"Self-test error: {ex.Message}", "Error", 
+                ContentDialogButton.OK, ContentDialogImage.Error);
             StatusText = "Self-test error";
         }
     }
 
     private void ShowPreferences()
     {
-        global::System.Windows.MessageBox.Show("Preferences dialog - to be implemented", "Preferences", 
-            global::System.Windows.MessageBoxButton.OK, global::System.Windows.MessageBoxImage.Information);
+        ContentDialog.Show("Preferences dialog - to be implemented", "Preferences", 
+            ContentDialogButton.OK, ContentDialogImage.Information);
     }
 
     private void ShowAbout()
     {
         var version = typeof(MainViewModel).Assembly.GetName().Version;
-        global::System.Windows.MessageBox.Show(
+        ContentDialog.Show(
             $"BrokenArrow SkinLab\nVersion {version}\n\n" +
             "A comprehensive WPF-based GUI skinning application\n" +
             "modeled after KnobMan and SkinMan.\n\n" +
             "© 2026 Broken Arrow Software",
             "About BrokenArrow SkinLab",
-            global::System.Windows.MessageBoxButton.OK,
-            global::System.Windows.MessageBoxImage.Information);
+            ContentDialogButton.OK,
+            ContentDialogImage.Information);
     }
 
     #endregion

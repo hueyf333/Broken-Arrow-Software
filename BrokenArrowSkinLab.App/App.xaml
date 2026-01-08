@@ -1,9 +1,25 @@
-﻿<Application x:Class="BrokenArrowSkinLab.App.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:BrokenArrowSkinLab.App"
-             StartupUri="MainWindow.xaml">
+﻿<Application
+    x:Class="BrokenArrowSkinLab.App.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BrokenArrowSkinLab.App">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+                <!-- Dark Theme Resources -->
+                <ResourceDictionary>
+                    <SolidColorBrush x:Key="ApplicationPageBackgroundThemeBrush" Color="#1E1E1E"/>
+                    <SolidColorBrush x:Key="SystemControlBackgroundAltHighBrush" Color="#252526"/>
+                    <SolidColorBrush x:Key="SystemControlBackgroundBaseLowBrush" Color="#2D2D30"/>
+                    <SolidColorBrush x:Key="SystemControlForegroundBaseHighBrush" Color="#FFFFFF"/>
+                    <SolidColorBrush x:Key="SystemControlHighlightAccentBrush" Color="#007ACC"/>
+                    <SolidColorBrush x:Key="SystemControlHighlightAltAccentBrush" Color="#00ADEF"/>
+                    <SolidColorBrush x:Key="SystemControlForegroundBaseMediumBrush" Color="#CCCCCC"/>
+                    <SolidColorBrush x:Key="SystemControlBackgroundChromeMediumBrush" Color="#3E3E42"/>
+                    <SolidColorBrush x:Key="SystemControlBackgroundChromeHighBrush" Color="#007ACC"/>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
