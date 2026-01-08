@@ -48,9 +48,10 @@ A KnobMan/SkinMan-style skin authoring tool for creating knob graphics and UI la
 
 ### Prerequisites
 
-- CMake 3.22 or higher
 - C++17 compatible compiler (GCC 7+, Clang 5+, MSVC 2017+, Xcode 10+)
-- JUCE framework (included as submodule)
+- JUCE framework (version 8.0.4 or compatible)
+- **For CMake builds**: CMake 3.22 or higher
+- **For Projucer builds**: Projucer application from JUCE
 
 #### Linux
 ```bash
@@ -68,6 +69,8 @@ xcode-select --install
 - Visual Studio 2017 or later with C++ development tools
 
 ### Build Steps
+
+#### Method 1: Using CMake (Recommended)
 
 1. **Clone the repository**:
 ```bash
@@ -100,6 +103,27 @@ cmake --build . --config Release
 # Windows
 BrokenArrowSkinLab_artefacts\Release\BrokenArrowSkinLab.exe
 ```
+
+#### Method 2: Using Projucer
+
+1. **Clone the repository and download JUCE** (same as Method 1, steps 1-2)
+
+2. **Open the project in Projucer**:
+   - Launch Projucer from your JUCE installation
+   - Open `BrokenArrowSkinLab.jucer` file in the repository root
+   - The project will automatically configure itself
+
+3. **Select your target platform**:
+   - Click on the appropriate exporter (Xcode, Visual Studio 2022, Linux Makefile)
+   - Click "Save Project and Open in IDE" button
+
+4. **Build in your IDE**:
+   - **Xcode (macOS)**: Select the BrokenArrowSkinLab target and build (⌘B)
+   - **Visual Studio (Windows)**: Build the solution (F7)
+   - **Linux Makefile**: Run `make` in the Builds/LinuxMakefile directory
+
+5. **Run the application**:
+   - The built executable will be in the `Builds/[Platform]/build/` directory
 
 ## Usage
 
