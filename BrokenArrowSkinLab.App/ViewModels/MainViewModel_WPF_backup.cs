@@ -6,11 +6,9 @@ using BrokenArrowSkinLab.Core.IO;
 using BrokenArrowSkinLab.Core.Services;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Windows.Input;
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
+using System.Windows.Input;
 using Windows.Storage.Pickers;
-using Windows.Storage;
 
 namespace BrokenArrowSkinLab.App.ViewModels;
 
@@ -131,7 +129,7 @@ public class MainViewModel : ViewModelBase
         OpenProjectCommand = new RelayCommand(async _ => await OpenProjectAsync());
         SaveProjectCommand = new RelayCommand(async _ => await SaveProjectAsync(), _ => IsDirty);
         SaveProjectAsCommand = new RelayCommand(async _ => await SaveProjectAsAsync());
-        ExitCommand = new RelayCommand(_ => Application.Current.Exit());
+        ExitCommand = new RelayCommand(_ => Microsoft.UI.Xaml.Application.Current.Exit());
 
         // Edit menu
         UndoCommand = new RelayCommand(_ => _undoRedoService.Undo(), _ => _undoRedoService.CanUndo);
@@ -151,12 +149,7 @@ public class MainViewModel : ViewModelBase
 
     private void UpdateCommandStates()
     {
-        if (UndoCommand is RelayCommand undoCmd)
-            undoCmd.RaiseCanExecuteChanged();
-        if (RedoCommand is RelayCommand redoCmd)
-            redoCmd.RaiseCanExecuteChanged();
-        if (SaveProjectCommand is RelayCommand saveCmd)
-            saveCmd.RaiseCanExecuteChanged();
+        CommandManager.InvalidateRequerySuggested();
     }
 
     #endregion
@@ -186,26 +179,19 @@ public class MainViewModel : ViewModelBase
         if (!CheckSaveChanges())
             return;
 
-        var picker = new FileOpenPicker();
-        picker.FileTypeFilter.Add(".baslproj");
-        picker.FileTypeFilter.Add("*");
-        
-        // Get window handle for picker
-        var window = (Application.Current as App)?.Window;
-        if (window != null)
+        var dialog = new Windows.Storage.Pickers.FileOpenPicker
         {
-            var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
-            WinRT.Interop.InitializeWithWindow.Initialize(picker, hwnd);
-        }
+            Filter = "BrokenArrow SkinLab Project (*.baslproj)|*.baslproj|All Files (*.*)|*.*",
+            Title = "Open Project"
+        };
 
-        var file = await picker.PickSingleFileAsync();
-        if (file != null)
+        if (dialog.ShowDialog() == true)
         {
             try
             {
-                var project = await ProjectIO.LoadProjectAsync(file.Path);
+                var project = await ProjectIO.LoadProjectAsync(dialog.FileName);
                 CurrentProject = project;
-                CurrentFilePath = file.Path;
+                CurrentFilePath = dialog.FileName;
                 IsDirty = false;
 
                 Knobs.Clear();
@@ -217,11 +203,12 @@ public class MainViewModel : ViewModelBase
                     Layouts.Add(layout);
 
                 _undoRedoService.Clear();
-                StatusText = $"Opened project: {file.Name}";
+                StatusText = $"Opened project: {Path.GetFileName(dialog.FileName)}";
             }
             catch (Exception ex)
             {
-                await ShowErrorAsync($"Error opening project: {ex.Message}");
+                ContentDialog.Show($"Error opening project: {ex.Message}", "Error", 
+                    ContentDialogButton.OK, ContentDialogImage.Error);
             }
         }
     }
@@ -244,28 +231,23 @@ public class MainViewModel : ViewModelBase
         }
         catch (Exception ex)
         {
-            await ShowErrorAsync($"Error saving project: {ex.Message}");
+            ContentDialog.Show($"Error saving project: {ex.Message}", "Error", 
+                ContentDialogButton.OK, ContentDialogImage.Error);
         }
     }
 
     private async Task SaveProjectAsAsync()
     {
-        var picker = new FileSavePicker();
-        picker.FileTypeChoices.Add("BrokenArrow SkinLab Project", new List<string> { ".baslproj" });
-        picker.SuggestedFileName = CurrentProject.Name + ".baslproj";
-        
-        // Get window handle for picker
-        var window = (Application.Current as App)?.Window;
-        if (window != null)
+        var dialog = new Windows.Storage.Pickers.FileSavePicker
         {
-            var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
-            WinRT.Interop.InitializeWithWindow.Initialize(picker, hwnd);
-        }
+            Filter = "BrokenArrow SkinLab Project (*.baslproj)|*.baslproj|All Files (*.*)|*.*",
+            Title = "Save Project As",
+            FileName = CurrentProject.Name + ".baslproj"
+        };
 
-        var file = await picker.PickSaveFileAsync();
-        if (file != null)
+        if (dialog.ShowDialog() == true)
         {
-            CurrentFilePath = file.Path;
+            CurrentFilePath = dialog.FileName;
             await SaveProjectAsync();
         }
     }
@@ -275,22 +257,21 @@ public class MainViewModel : ViewModelBase
         if (!IsDirty)
             return true;
 
-        // Note: In WinUI, dialogs must be async, so this is a simplified version
-        // A full implementation would need to restructure calling code
-        StatusText = "Unsaved changes - please save manually";
-        return true; // Simplified for now
-    }
+        var result = ContentDialog.Show(
+            "Do you want to save changes to the current project?",
+            "Save Changes",
+            ContentDialogButton.YesNoCancel,
+            ContentDialogImage.Question);
 
-    private async Task ShowErrorAsync(string message)
-    {
-        var dialog = new ContentDialog
+        if (result == ContentDialogResult.Cancel)
+            return false;
+
+        if (result == ContentDialogResult.Yes)
         {
-            Title = "Error",
-            Content = message,
-            CloseButtonText = "OK",
-            XamlRoot = (Application.Current as App)?.Window?.Content?.XamlRoot
-        };
-        await dialog.ShowAsync();
+            SaveProjectAsync().Wait();
+        }
+
+        return true;
     }
 
     #endregion
@@ -341,48 +322,37 @@ public class MainViewModel : ViewModelBase
                 ? $"Self-test completed successfully!\n\nPassed: {result.TestsPassed}/{result.TotalTests}\n\n{result.Log}"
                 : $"Self-test failed!\n\nPassed: {result.TestsPassed}/{result.TotalTests}\n\n{result.Log}";
 
-            var dialog = new ContentDialog
-            {
-                Title = "Self-Test Results",
-                Content = new ScrollViewer
-                {
-                    Content = new TextBlock { Text = message, TextWrapping = TextWrapping.Wrap }
-                },
-                CloseButtonText = "OK",
-                XamlRoot = (Application.Current as App)?.Window?.Content?.XamlRoot
-            };
-            await dialog.ShowAsync();
+            ContentDialog.Show(message, "Self-Test Results", 
+                ContentDialogButton.OK, 
+                result.Success ? ContentDialogImage.Information : ContentDialogImage.Warning);
             
             StatusText = result.Success ? "Self-test passed" : "Self-test failed";
         }
         catch (Exception ex)
         {
-            await ShowErrorAsync($"Self-test error: {ex.Message}");
+            ContentDialog.Show($"Self-test error: {ex.Message}", "Error", 
+                ContentDialogButton.OK, ContentDialogImage.Error);
             StatusText = "Self-test error";
         }
     }
 
     private void ShowPreferences()
     {
-        StatusText = "Preferences dialog - to be implemented";
+        ContentDialog.Show("Preferences dialog - to be implemented", "Preferences", 
+            ContentDialogButton.OK, ContentDialogImage.Information);
     }
 
     private void ShowAbout()
     {
         var version = typeof(MainViewModel).Assembly.GetName().Version;
-        var message = $"BrokenArrow SkinLab\nVersion {version}\n\n" +
-            "A comprehensive WinUI-based GUI skinning application\n" +
+        ContentDialog.Show(
+            $"BrokenArrow SkinLab\nVersion {version}\n\n" +
+            "A comprehensive WPF-based GUI skinning application\n" +
             "modeled after KnobMan and SkinMan.\n\n" +
-            "© 2026 Broken Arrow Software";
-        
-        var dialog = new ContentDialog
-        {
-            Title = "About BrokenArrow SkinLab",
-            Content = message,
-            CloseButtonText = "OK",
-            XamlRoot = (Application.Current as App)?.Window?.Content?.XamlRoot
-        };
-        _ = dialog.ShowAsync();
+            "© 2026 Broken Arrow Software",
+            "About BrokenArrow SkinLab",
+            ContentDialogButton.OK,
+            ContentDialogImage.Information);
     }
 
     #endregion
