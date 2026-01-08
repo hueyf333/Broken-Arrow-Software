@@ -1,9 +1,12 @@
+using Microsoft.UI.Xaml.Controls;
+
 namespace BrokenArrowSkinLab.App.Views;
 
-public partial class KnobDesignerView : System.Windows.Controls.UserControl
+public sealed partial class KnobDesignerView : UserControl
 {
     public KnobDesignerView()
     {
-        InitializeComponent();
+        this.InitializeComponent();
     }
 }
+

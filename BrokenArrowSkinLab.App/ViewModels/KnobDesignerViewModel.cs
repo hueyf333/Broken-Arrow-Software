@@ -6,8 +6,8 @@ using BrokenArrowSkinLab.Core.Services;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
-using Microsoft.Win32;
+using Microsoft.UI.Xaml.Media.Imaging;
+using Windows.Storage.Pickers;
 
 namespace BrokenArrowSkinLab.App.ViewModels;
 
@@ -18,7 +18,7 @@ public class KnobDesignerViewModel : ViewModelBase
     private KnobModel? _currentKnob;
     private LayerModel? _selectedLayer;
     private int _previewFrameIndex;
-    private BitmapSource? _previewImage;
+    private WriteableBitmap? _previewImage;
     private bool _isRendering;
     private string _statusText = "Ready";
 
@@ -74,7 +74,7 @@ public class KnobDesignerViewModel : ViewModelBase
         }
     }
 
-    public BitmapSource? PreviewImage
+    public WriteableBitmap? PreviewImage
     {
         get => _previewImage;
         set => SetProperty(ref _previewImage, value);

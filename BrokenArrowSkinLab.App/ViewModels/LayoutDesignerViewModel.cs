@@ -2,7 +2,7 @@ using BrokenArrowSkinLab.App.Commands;
 using BrokenArrowSkinLab.App.Infrastructure;
 using BrokenArrowSkinLab.Core.Models;
 using System.Collections.ObjectModel;
-using System.Windows;
+using Microsoft.UI.Xaml;
 using System.Windows.Input;
 
 namespace BrokenArrowSkinLab.App.ViewModels;

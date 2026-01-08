@@ -1,6 +1,6 @@
 # BrokenArrow SkinLab
 
-A comprehensive WPF-based GUI skinning application modeled after KnobMan and SkinMan for creating professional audio plugin interfaces and control skins.
+A comprehensive WinUI 3-based GUI skinning application modeled after KnobMan and SkinMan for creating professional audio plugin interfaces and control skins.
 
 ## Features
 
