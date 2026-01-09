@@ -112,7 +112,7 @@ bool StateManager::deserialize(const std::vector<uint8_t>& input,
     // Read plugin path
     pluginPath.resize(header.pluginPathSize);
     if (header.pluginPathSize > 0) {
-        memcpy(&pluginPath[0], ptr, header.pluginPathSize);
+        memcpy(pluginPath.data(), ptr, header.pluginPathSize);
         ptr += header.pluginPathSize;
     }
     

@@ -68,8 +68,10 @@ void AAX_AlgorithmProcessCallback(
         }
     }
     
-    // Apply output gain
-    if (context->outputGain != 1.0f) {
+    // Apply output gain (pre-computed linear gain should be stored in context in production)
+    // TODO: For production, compute linearGain = powf(10.0f, gainDB / 20.0f) when gain changes
+    // and store it in context to avoid expensive powf() call in audio thread
+    if (context->outputGain != 0.0f) {
         float linearGain = powf(10.0f, context->outputGain / 20.0f);
         
         for (int32_t ch = 0; ch < numOutputChannels; ++ch) {

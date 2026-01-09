@@ -45,7 +45,8 @@ public:
                writeIndex.load(std::memory_order_acquire);
     }
 
-    // Get approximate size
+    // Get approximate size (best-effort, may be inconsistent due to concurrent access)
+    // Note: This is inherently racy for lock-free queues - use for diagnostics only
     size_t size() const {
         size_t write = writeIndex.load(std::memory_order_acquire);
         size_t read = readIndex.load(std::memory_order_acquire);

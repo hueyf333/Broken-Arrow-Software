@@ -111,10 +111,11 @@ private:
     ParameterBridge* paramBridge;
 
     // VST3 SDK interfaces (opaque pointers to avoid header dependency)
-    void* component;        // IComponent*
-    void* controller;       // IEditController*
-    void* audioProcessor;   // IAudioProcessor*
-    void* plugView;         // IPlugView*
+    // These would be actual VST3 interface pointers in production:
+    void* component;        // Steinberg::Vst::IComponent*
+    void* controller;       // Steinberg::Vst::IEditController*
+    void* audioProcessor;   // Steinberg::Vst::IAudioProcessor*
+    void* plugView;         // Steinberg::IPlugView*
 
     // Private implementation details
     struct Impl;
