@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="BrkArr" name="Broken Arrow M900" projectType="audioplug" useAppConfig="0"
+              addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
+              version="1.0.0" bundleIdentifier="com.brokenarrow.m900" includeBinaryInAppConfig="1"
+              cppLanguageStandard="20" companyName="Broken Arrow Software" companyCopyright="Copyright (c) 2026 Broken Arrow Software"
+              companyWebsite="https://brokenarrowsoftware.com" companyEmail="support@brokenarrowsoftware.com"
+              pluginFormats="buildAAX,buildAU,buildStandalone,buildVST3" pluginCharacteristicsValue="pluginProducesMidiOut,pluginWantsMidiIn"
+              pluginManufacturer="Broken Arrow Software" pluginManufacturerCode="BrAr"
+              pluginCode="M900" aaxIdentifier="com.brokenarrow.m900" pluginAAXCategory="0">
+  <MAINGROUP id="cOFqKx" name="Broken Arrow M900">
+    <GROUP id="{F8D1E3C4-7A2B-4C5D-8E9F-0A1B2C3D4E5F}" name="Source">
+      <GROUP id="{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}" name="DSP">
+        <FILE id="dspInput" name="InputStage.cpp" compile="1" resource="0"
+              file="Source/DSP/InputStage.cpp"/>
+        <FILE id="dspInputH" name="InputStage.h" compile="0" resource="0"
+              file="Source/DSP/InputStage.h"/>
+        <FILE id="dspPreamp" name="PreampStage.cpp" compile="1" resource="0"
+              file="Source/DSP/PreampStage.cpp"/>
+        <FILE id="dspPreampH" name="PreampStage.h" compile="0" resource="0"
+              file="Source/DSP/PreampStage.h"/>
+        <FILE id="dspTone" name="ToneStack.cpp" compile="1" resource="0"
+              file="Source/DSP/ToneStack.cpp"/>
+        <FILE id="dspToneH" name="ToneStack.h" compile="0" resource="0"
+              file="Source/DSP/ToneStack.h"/>
+        <FILE id="dspPower" name="PowerAmp.cpp" compile="1" resource="0"
+              file="Source/DSP/PowerAmp.cpp"/>
+        <FILE id="dspPowerH" name="PowerAmp.h" compile="0" resource="0"
+              file="Source/DSP/PowerAmp.h"/>
+        <FILE id="dspCab" name="CabinetSimulator.cpp" compile="1" resource="0"
+              file="Source/DSP/CabinetSimulator.cpp"/>
+        <FILE id="dspCabH" name="CabinetSimulator.h" compile="0" resource="0"
+              file="Source/DSP/CabinetSimulator.h"/>
+        <FILE id="dspNoise" name="NoiseGenerator.cpp" compile="1" resource="0"
+              file="Source/DSP/NoiseGenerator.cpp"/>
+        <FILE id="dspNoiseH" name="NoiseGenerator.h" compile="0" resource="0"
+              file="Source/DSP/NoiseGenerator.h"/>
+        <FILE id="dspOutput" name="OutputStage.cpp" compile="1" resource="0"
+              file="Source/DSP/OutputStage.cpp"/>
+        <FILE id="dspOutputH" name="OutputStage.h" compile="0" resource="0"
+              file="Source/DSP/OutputStage.h"/>
+        <FILE id="dspTest" name="DSPTestHarness.cpp" compile="1" resource="0"
+              file="Source/DSP/DSPTestHarness.cpp"/>
+        <FILE id="dspTestH" name="DSPTestHarness.h" compile="0" resource="0"
+              file="Source/DSP/DSPTestHarness.h"/>
+      </GROUP>
+      <FILE id="pluginProc" name="PluginProcessor.cpp" compile="1" resource="0"
+            file="Source/PluginProcessor.cpp"/>
+      <FILE id="pluginProcH" name="PluginProcessor.h" compile="0" resource="0"
+            file="Source/PluginProcessor.h"/>
+      <FILE id="pluginEdit" name="PluginEditor.cpp" compile="1" resource="0"
+            file="Source/PluginEditor.cpp"/>
+      <FILE id="pluginEditH" name="PluginEditor.h" compile="0" resource="0"
+            file="Source/PluginEditor.h"/>
+    </GROUP>
+  </MAINGROUP>
+  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>
+  <EXPORTFORMATS>
+    <VS2022 targetFolder="Builds/VisualStudio2022" extraCompilerFlags="/std:c++20">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="Broken Arrow M900"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="Broken Arrow M900"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_dsp" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../../JUCE/modules"/>
+      </MODULEPATHS>
+    </VS2022>
+    <XCODE_MAC targetFolder="Builds/MacOSX" extraCompilerFlags="-std=c++20">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="Broken Arrow M900"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="Broken Arrow M900"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_dsp" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../../JUCE/modules"/>
+      </MODULEPATHS>
+    </XCODE_MAC>
+    <LINUX_MAKE targetFolder="Builds/LinuxMakefile" extraCompilerFlags="-std=c++20">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="Broken Arrow M900"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="Broken Arrow M900"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_dsp" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../../JUCE/modules"/>
+      </MODULEPATHS>
+    </LINUX_MAKE>
+  </EXPORTFORMATS>
+  <MODULES>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_plugin_client" showAllCode="1" useLocalCopy="0"
+            useGlobalPath="1"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_dsp" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+  </MODULES>
+  <LIVE_SETTINGS>
+    <WINDOWS/>
+    <OSX/>
+    <LINUX/>
+  </LIVE_SETTINGS>
+</JUCERPROJECT>
