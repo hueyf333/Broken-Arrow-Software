@@ -3,6 +3,7 @@
 *.user
 *.suo
 *.sln.docstates
+User.props
 *.aps
 *.ncb
 *.opensdf

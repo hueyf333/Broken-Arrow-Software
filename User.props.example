@@ -1,0 +1,53 @@
+# Example User Configuration for AAX SDK Path
+
+# This is an example of how to create a user property sheet to configure
+# the AAX SDK path for your local development environment.
+
+# Option 1: System Environment Variable (Recommended)
+# -----------------------------------------------------
+# Set the AAX_SDK_PATH environment variable in Windows:
+#
+#   Variable name:  AAX_SDK_PATH
+#   Variable value: C:\SDKs\AAX_SDK
+#
+# After setting, restart Visual Studio.
+
+
+# Option 2: User Property Sheet
+# -----------------------------
+# Create a file named 'User.props' in the solution directory with this content:
+
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <!-- Set your AAX SDK path here -->
+    <AAX_SDK_PATH>C:\SDKs\AAX_SDK</AAX_SDK_PATH>
+  </PropertyGroup>
+</Project>
+
+# Then import it in Patchwrap_AAX.vcxproj:
+# Add this line after the line that imports Microsoft.Cpp.props:
+#
+#   <Import Project="$(SolutionDir)User.props" Condition="Exists('$(SolutionDir)User.props')" />
+#
+# The User.props file is in .gitignore so it won't be committed.
+
+
+# Option 3: Edit vcxproj Directly (Not Recommended)
+# --------------------------------------------------
+# Open Patchwrap_AAX.vcxproj in a text editor
+# Find the PropertyGroup sections and add:
+#
+#   <AAX_SDK_PATH>C:\SDKs\AAX_SDK</AAX_SDK_PATH>
+#
+# Warning: This will be committed to the repository unless you're careful.
+
+
+# Verification
+# ------------
+# After setting the path, open Patchwrap.sln in Visual Studio.
+# Go to: Project → Patchwrap_AAX Properties → C/C++ → General
+# Check "Additional Include Directories" - you should see:
+#   $(AAX_SDK_PATH)\Interfaces
+#
+# If you see a resolved path (e.g., C:\SDKs\AAX_SDK\Interfaces), it's working!
