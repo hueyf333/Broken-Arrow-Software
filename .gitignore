@@ -5,6 +5,9 @@ Builds/
 bin/
 obj/
 
+# JUCE framework (large, users should clone it)
+JUCE/
+
 # JUCE specific
 JuceLibraryCode/
 *.jucer.bak

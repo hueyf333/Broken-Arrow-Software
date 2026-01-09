@@ -76,3 +76,34 @@ PUBLIC
     juce::juce_recommended_lto_flags
     juce::juce_recommended_warning_flags
 )
+
+# Optional: Build DSP test executable
+option(BUILD_TESTS "Build DSP tests" ON)
+
+if(BUILD_TESTS)
+    add_executable(dsp_test
+        test/dsp_test.cpp
+        SVT-CL/Source/DSP/TubePreamp.cpp
+        SVT-CL/Source/DSP/ToneStack.cpp
+        SVT-CL/Source/DSP/PowerAmp.cpp
+        SVT-CL/Source/DSP/CabSimulator.cpp
+        SVT-CL/Source/DSP/SVTProcessor.cpp
+    )
+    
+    target_include_directories(dsp_test PRIVATE
+        SVT-CL/Source
+        SVT-CL/Source/DSP
+    )
+    
+    target_compile_definitions(dsp_test PRIVATE
+        JUCE_STANDALONE_APPLICATION=1
+        JUCE_USE_CURL=0
+        JUCE_WEB_BROWSER=0
+    )
+    
+    target_link_libraries(dsp_test PRIVATE
+        juce::juce_audio_basics
+        juce::juce_dsp
+        juce::juce_core
+    )
+endif()

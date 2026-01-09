@@ -10,6 +10,7 @@ void TubePreamp::prepare(const juce::dsp::ProcessSpec& spec)
     oversampler.initProcessing(spec.maximumBlockSize);
     
     gainSmoothed.reset(sampleRate, 0.05);
+    gainSmoothed.setCurrentAndTargetValue(0.0f);
     
     // Initialize DC blockers for each stage
     for (auto& blocker : dcBlockers)

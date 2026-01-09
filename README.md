@@ -45,14 +45,39 @@ A production-ready Ampeg SVT-CL style bass amplifier plugin built with JUCE and 
 ## Building
 
 ### Prerequisites
-- CMake 3.22 or higher
+- CMake 3.22 or higher (for CMake builds)
+- **OR** Projucer (for .jucer project - optional)
 - C++20 compatible compiler
   - Visual Studio 2022+ (Windows)
   - Xcode 13+ (macOS)
   - GCC 10+ or Clang 12+ (Linux)
-- JUCE 7.0.12 (included as submodule)
+- JUCE 7.0.12 (will be downloaded automatically, see instructions below)
+
+### Setup
+
+#### 1. Clone JUCE Framework
+
+```bash
+# Clone JUCE 7.0.12 into the project directory
+git clone --depth 1 --branch 7.0.12 https://github.com/juce-framework/JUCE.git
+```
+
+#### 2. Install Platform Dependencies
+
+**Linux only:**
+```bash
+sudo apt-get update
+sudo apt-get install -y libasound2-dev libfreetype6-dev libx11-dev \
+    libxrandr-dev libxinerama-dev libxcursor-dev libgl1-mesa-dev
+```
+
+macOS and Windows typically have all required dependencies already installed.
 
 ### Build Instructions
+
+You can build using either CMake (recommended) or Projucer.
+
+#### Option A: CMake Build (Recommended)
 
 #### Windows (Visual Studio 2022+)
 
@@ -95,6 +120,14 @@ cmake --build build --config Release
 # - VST3: build/SVT-CL_artefacts/Release/VST3/SVT-CL.vst3
 # - Standalone: build/SVT-CL_artefacts/Release/Standalone/SVT-CL
 ```
+
+#### Option B: Projucer Build
+
+1. Open `SVT-CL/SVT-CL.jucer` in Projucer
+2. Click "Save Project and Open in IDE"
+3. Build using Visual Studio 2022, Xcode, or Linux Makefile
+
+The .jucer project is pre-configured for VS2022+, Xcode, and Linux builds.
 
 ### Installation
 

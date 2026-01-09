@@ -10,6 +10,7 @@ void PowerAmp::prepare(const juce::dsp::ProcessSpec& spec)
     oversampler.initProcessing(spec.maximumBlockSize);
     
     masterSmoothed.reset(sampleRate, 0.05);
+    masterSmoothed.setCurrentAndTargetValue(0.0f);
     
     // Configure compressor for power amp behavior
     compressor.prepare(spec);

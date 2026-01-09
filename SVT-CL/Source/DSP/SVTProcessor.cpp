@@ -2,6 +2,8 @@
 
 SVTProcessor::SVTProcessor()
 {
+    // Initialize with warmup completed
+    standbyWarmupSamples = standbyWarmupTime;
 }
 
 void SVTProcessor::prepare(const juce::dsp::ProcessSpec& spec)

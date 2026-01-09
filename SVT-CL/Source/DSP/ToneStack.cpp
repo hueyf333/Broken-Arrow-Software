@@ -11,10 +11,15 @@ void ToneStack::prepare(const juce::dsp::ProcessSpec& spec)
     filterChain.prepare(spec);
     
     bassSmoothed.reset(sampleRate, 0.05);
+    bassSmoothed.setCurrentAndTargetValue(0.5f);
     midSmoothed.reset(sampleRate, 0.05);
+    midSmoothed.setCurrentAndTargetValue(0.5f);
     trebleSmoothed.reset(sampleRate, 0.05);
+    trebleSmoothed.setCurrentAndTargetValue(0.5f);
     ultraLoSmoothed.reset(sampleRate, 0.05);
+    ultraLoSmoothed.setCurrentAndTargetValue(0.0f);
     ultraHiSmoothed.reset(sampleRate, 0.05);
+    ultraHiSmoothed.setCurrentAndTargetValue(0.0f);
     
     updateFilters();
 }
