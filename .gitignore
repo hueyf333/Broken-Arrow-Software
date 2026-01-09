@@ -1,0 +1,50 @@
+# Build directories
+build/
+cmake-build-*/
+Builds/
+bin/
+obj/
+
+# JUCE specific
+JuceLibraryCode/
+*.jucer.bak
+
+# IDE files
+.vs/
+.vscode/
+*.suo
+*.user
+*.sln.docstates
+*.vcxproj.filters
+*.vcxproj.user
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Compiled files
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+CTestTestfile.cmake
+
+# VST3/AU build outputs (keep source, ignore built plugins)
+*.vst3
+*.component
+*.aaxplugin
+
+# Logs
+*.log
