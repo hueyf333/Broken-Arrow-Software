@@ -1,0 +1,62 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.sln.docstates
+*.aps
+*.ncb
+*.opensdf
+*.sdf
+*.cachefile
+*.VC.db
+*.VC.VC.opendb
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Output
+*.aaxplugin/
+*.aaxplugin
+
+# Intermediate files
+*.obj
+*.o
+*.pch
+*.pdb
+*.ipch
+*.ilk
+*.exp
+*.lib
+*.dll
+*.exe
+
+# ReSharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+
+# Build artifacts
+Build/
+build/
+out/
+
+# Dependencies (will be fetched)
+third_party/vst3sdk/
