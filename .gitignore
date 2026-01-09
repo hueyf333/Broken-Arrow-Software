@@ -1,0 +1,39 @@
+# Build artifacts
+Builds/
+*.o
+*.obj
+*.exe
+*.app
+*.vst3
+*.component
+*.aaxplugin
+
+# IDE files
+.vs/
+.vscode/
+*.xcworkspace
+*.xcuserdata
+*.user
+*.suo
+*.sdf
+*.opensdf
+
+# JuceLibraryCode (generated)
+JuceLibraryCode/
+
+# macOS
+.DS_Store
+*.dSYM
+
+# Windows
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.log
+*.bak
+*~
+
+# User-specific files
+*.swp
+*.swo
