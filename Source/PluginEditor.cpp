@@ -13,8 +13,12 @@ SuperBassmanAudioProcessorEditor::SuperBassmanAudioProcessorEditor (SuperBassman
     setupToggleButton (inputPadButton, "PAD", "inputPad");
     setupToggleButton (hpfEnableButton, "HPF", "hpfEnable");
     
-    setupSlider (hpfFreqSlider, juce::Label(), "", "hpfFreq");
+    hpfFreqSlider.setSliderStyle (juce::Slider::RotaryHorizontalVerticalDrag);
+    hpfFreqSlider.setTextBoxStyle (juce::Slider::TextBoxBelow, false, 60, 20);
     hpfFreqSlider.setTextValueSuffix (" Hz");
+    addAndMakeVisible (hpfFreqSlider);
+    sliderAttachments.push_back (std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment> (
+        audioProcessor.getAPVTS(), "hpfFreq", hpfFreqSlider));
     
     // Channel selection
     channelLabel.setText ("CHANNEL", juce::dontSendNotification);

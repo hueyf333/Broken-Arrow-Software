@@ -49,7 +49,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout SuperBassmanAudioProcessor::
     layout.add (std::make_unique<juce::AudioParameterFloat> ("bass", "Bass",
         juce::NormalisableRange<float> (0.0f, 10.0f, 0.1f), 5.0f));
     layout.add (std::make_unique<juce::AudioParameterFloat> ("mid", "Mid",
-        juce::NormalisableRange<juce::AudioParameterFloat> (0.0f, 10.0f, 0.1f), 5.0f));
+        juce::NormalisableRange<float> (0.0f, 10.0f, 0.1f), 5.0f));
     layout.add (std::make_unique<juce::AudioParameterFloat> ("treble", "Treble",
         juce::NormalisableRange<float> (0.0f, 10.0f, 0.1f), 5.0f));
     layout.add (std::make_unique<juce::AudioParameterFloat> ("presence", "Presence",

@@ -1,6 +1,7 @@
 #pragma once
 
-#include <JuceHeader.h>
+#include <juce_dsp/juce_dsp.h>
+#include <juce_audio_processors/juce_audio_processors.h>
 
 /**
  * Input Stage - handles input conditioning
@@ -19,7 +20,7 @@ public:
         sampleRate = spec.sampleRate;
         
         // DC blocker - high-pass at ~5 Hz
-        dcBlocker.setCoefficients (juce::IIRCoefficients::makeHighPass (sampleRate, 5.0));
+        *dcBlocker.state = *juce::dsp::IIR::Coefficients<float>::makeHighPass (sampleRate, 5.0);
         dcBlocker.prepare (spec);
         
         // High-pass filter
@@ -89,7 +90,7 @@ private:
     double sampleRate = 44100.0;
     float lastHpfFreq = 40.0f;
     
-    juce::dsp::IIR::Filter<float> dcBlocker;
+    juce::dsp::ProcessorDuplicator<juce::dsp::IIR::Filter<float>, juce::dsp::IIR::Coefficients<float>> dcBlocker;
     juce::dsp::ProcessorDuplicator<juce::dsp::IIR::Filter<float>, juce::dsp::IIR::Coefficients<float>> highPassFilter;
     juce::SmoothedValue<float> inputGainSmooth;
 };
