@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AmpegSVT>
+  <PARAM id="inputPad" value="0.0"/>
+  <PARAM id="inputTrim" value="0.0"/>
+  <PARAM id="gateEnable" value="0.0"/>
+  <PARAM id="gateThreshold" value="-60.0"/>
+  <PARAM id="preampDrive" value="0.4"/>
+  <PARAM id="preampBias" value="0.0"/>
+  <PARAM id="bass" value="0.6"/>
+  <PARAM id="mid" value="0.5"/>
+  <PARAM id="treble" value="0.4"/>
+  <PARAM id="midFreq" value="1"/>
+  <PARAM id="brightSwitch" value="0.0"/>
+  <PARAM id="ultraLo" value="0.0"/>
+  <PARAM id="ultraHi" value="0.0"/>
+  <PARAM id="powerDrive" value="0.8"/>
+  <PARAM id="master" value="0.7"/>
+  <PARAM id="cabMix" value="1.0"/>
+  <PARAM id="outputGain" value="0.0"/>
+  <PARAM id="bypass" value="0.0"/>
+</AmpegSVT>

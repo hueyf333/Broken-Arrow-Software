@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="Asvt01" name="Ampeg SVT Bass Amp" projectType="audioplug"
+              useAppConfig="0" addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1"
+              version="1.0.0" companyName="Broken Arrow Software" companyCopyright="Broken Arrow Software"
+              companyWebsite="https://github.com/hueyf333/Broken-Arrow-Software"
+              companyEmail="" bundleIdentifier="com.BrokenArrowSoftware.AmpegSVT"
+              pluginManufacturerCode="Brka" pluginCode="Asvt" pluginChannelConfigs="{1, 2}, {2, 2}"
+              pluginIsSynth="0" pluginWantsMidiIn="0" pluginProducesMidiOut="0"
+              pluginIsMidiEffectPlugin="0" pluginEditorRequiresKeys="0"
+              pluginAUExportPrefix="AmpegSVT" pluginRTASCategory="2"
+              aaxIdentifier="com.BrokenArrowSoftware.AmpegSVT" pluginAAXCategory="2"
+              pluginVST3Category="Fx,Distortion" displaySplashScreen="1"
+              reportAppUsage="1" splashScreenColour="Dark" cppLanguageStandard="20"
+              headerPath="../../Source&#10;../../JUCE/modules">
+  <MAINGROUP id="Kmm5Pg" name="Ampeg SVT Bass Amp">
+    <GROUP id="{8A7A8A8A-8A8A-8A8A-8A8A-8A8A8A8A8A8A}" name="Source">
+      <GROUP id="{8B7B8B8B-8B8B-8B8B-8B8B-8B8B8B8B8B8B}" name="DSP">
+        <FILE id="Kmm5P1" name="InputStage.cpp" compile="1" resource="0"
+              file="Source/DSP/InputStage.cpp"/>
+        <FILE id="Kmm5P2" name="InputStage.h" compile="0" resource="0" file="Source/DSP/InputStage.h"/>
+        <FILE id="Kmm5P3" name="TubePreamp.cpp" compile="1" resource="0"
+              file="Source/DSP/TubePreamp.cpp"/>
+        <FILE id="Kmm5P4" name="TubePreamp.h" compile="0" resource="0" file="Source/DSP/TubePreamp.h"/>
+        <FILE id="Kmm5P5" name="ToneStack.cpp" compile="1" resource="0"
+              file="Source/DSP/ToneStack.cpp"/>
+        <FILE id="Kmm5P6" name="ToneStack.h" compile="0" resource="0" file="Source/DSP/ToneStack.h"/>
+        <FILE id="Kmm5P7" name="PowerAmp.cpp" compile="1" resource="0" file="Source/DSP/PowerAmp.cpp"/>
+        <FILE id="Kmm5P8" name="PowerAmp.h" compile="0" resource="0" file="Source/DSP/PowerAmp.h"/>
+        <FILE id="Kmm5P9" name="CabSimulator.cpp" compile="1" resource="0"
+              file="Source/DSP/CabSimulator.cpp"/>
+        <FILE id="Kmm5PA" name="CabSimulator.h" compile="0" resource="0"
+              file="Source/DSP/CabSimulator.h"/>
+        <FILE id="Kmm5PB" name="Oversampler.cpp" compile="1" resource="0"
+              file="Source/DSP/Oversampler.cpp"/>
+        <FILE id="Kmm5PC" name="Oversampler.h" compile="0" resource="0" file="Source/DSP/Oversampler.h"/>
+      </GROUP>
+      <GROUP id="{8C7C8C8C-8C8C-8C8C-8C8C-8C8C8C8C8C8C}" name="Components">
+        <FILE id="Kmm5PD" name="CustomKnob.cpp" compile="1" resource="0"
+              file="Source/Components/CustomKnob.cpp"/>
+        <FILE id="Kmm5PE" name="CustomKnob.h" compile="0" resource="0" file="Source/Components/CustomKnob.h"/>
+        <FILE id="Kmm5PF" name="CustomSwitch.cpp" compile="1" resource="0"
+              file="Source/Components/CustomSwitch.cpp"/>
+        <FILE id="Kmm5PG" name="CustomSwitch.h" compile="0" resource="0"
+              file="Source/Components/CustomSwitch.h"/>
+        <FILE id="Kmm5PH" name="LevelMeter.cpp" compile="1" resource="0"
+              file="Source/Components/LevelMeter.cpp"/>
+        <FILE id="Kmm5PI" name="LevelMeter.h" compile="0" resource="0" file="Source/Components/LevelMeter.h"/>
+      </GROUP>
+      <FILE id="Kmm5PJ" name="PluginProcessor.cpp" compile="1" resource="0"
+            file="Source/PluginProcessor.cpp"/>
+      <FILE id="Kmm5PK" name="PluginProcessor.h" compile="0" resource="0"
+            file="Source/PluginProcessor.h"/>
+      <FILE id="Kmm5PL" name="PluginEditor.cpp" compile="1" resource="0"
+            file="Source/PluginEditor.cpp"/>
+      <FILE id="Kmm5PM" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+    </GROUP>
+  </MAINGROUP>
+  <MODULES>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_audio_plugin_client" showAllCode="1" useLocalCopy="0"
+            useGlobalPath="0"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="0"
+            useGlobalPath="0"/>
+    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0"
+            useGlobalPath="0"/>
+    <MODULE id="juce_dsp" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+  </MODULES>
+  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>
+  <EXPORTFORMATS>
+    <VS2022 targetFolder="Builds/VisualStudio2022">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="Ampeg SVT Bass Amp"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="Ampeg SVT Bass Amp"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_dsp" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../../JUCE/modules"/>
+      </MODULEPATHS>
+    </VS2022>
+    <XCODE_MAC targetFolder="Builds/MacOSX">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="Ampeg SVT Bass Amp"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="Ampeg SVT Bass Amp"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_dsp" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../../JUCE/modules"/>
+      </MODULEPATHS>
+    </XCODE_MAC>
+    <LINUX_MAKE targetFolder="Builds/LinuxMakefile">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="Ampeg SVT Bass Amp"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="Ampeg SVT Bass Amp"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_dsp" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../../JUCE/modules"/>
+      </MODULEPATHS>
+    </LINUX_MAKE>
+  </EXPORTFORMATS>
+</JUCERPROJECT>
