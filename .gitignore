@@ -1,0 +1,38 @@
+# JUCE Framework (not part of our project)
+JUCE/
+
+# Build artifacts
+Builds/
+build/
+cmake-build-*/
+
+# IDE files
+.vs/
+.vscode/
+*.user
+*.suo
+*.sdf
+*.opensdf
+*.xcuserstate
+*.xcworkspace
+xcuserdata/
+
+# Compiled binaries
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
+*.vst3
+*.component
+
+# Temp files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Node modules (if any web tools used)
+node_modules/

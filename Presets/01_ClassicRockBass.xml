@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Parameters>
+  <PARAM id="inputGain" value="0.0"/>
+  <PARAM id="inputPad" value="0.0"/>
+  <PARAM id="dcBlock" value="1.0"/>
+  <PARAM id="hpfEnable" value="1.0"/>
+  <PARAM id="hpfFreq" value="40.0"/>
+  <PARAM id="channel" value="0.0"/>
+  <PARAM id="preampGain" value="6.5"/>
+  <PARAM id="preampBias" value="0.2"/>
+  <PARAM id="bass" value="6.0"/>
+  <PARAM id="mid" value="4.0"/>
+  <PARAM id="treble" value="5.5"/>
+  <PARAM id="presence" value="5.0"/>
+  <PARAM id="drive" value="3.5"/>
+  <PARAM id="driveBlend" value="40.0"/>
+  <PARAM id="driveTone" value="6.0"/>
+  <PARAM id="masterVolume" value="6.0"/>
+  <PARAM id="powerSag" value="4.0"/>
+  <PARAM id="powerCompression" value="4.0"/>
+  <PARAM id="cabEnable" value="1.0"/>
+  <PARAM id="cabType" value="0.0"/>
+  <PARAM id="cabMix" value="100.0"/>
+  <PARAM id="outputGain" value="0.0"/>
+  <PARAM id="limiterEnable" value="1.0"/>
+  <PARAM id="bypass" value="0.0"/>
+</Parameters>
