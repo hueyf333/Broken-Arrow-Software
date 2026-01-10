@@ -38,6 +38,9 @@ JuceLibraryCode/
 Builds/
 *_artefacts/
 
+# JUCE framework (will be fetched as submodule)
+JUCE/
+
 # Audio files (except presets)
 *.wav
 *.aif
