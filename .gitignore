@@ -1,0 +1,51 @@
+# Build directories
+build/
+cmake-build-*/
+.vs/
+.vscode/
+*.xcodeproj/
+*.xcworkspace/
+
+# Compiled files
+*.o
+*.obj
+*.exe
+*.out
+*.app
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
+
+# IDEs
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.cmake
+!CMakeLists.txt
+
+# JUCE artifacts
+JuceLibraryCode/
+Builds/
+*_artefacts/
+
+# Audio files (except presets)
+*.wav
+*.aif
+*.aiff
+*.mp3
+*.flac
+!Assets/*.wav
+
+# OS specific
+Thumbs.db
+.DS_Store
