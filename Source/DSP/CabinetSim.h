@@ -27,6 +27,10 @@ public:
         mixSmooth.reset (sampleRate, 0.05);
         mixSmooth.setCurrentAndTargetValue (1.0f);
         
+        // Pre-allocate dry buffer for wet/dry mixing
+        dryBuffer.setSize (static_cast<int> (spec.numChannels), 
+                          static_cast<int> (spec.maximumBlockSize), false, false, true);
+        
         updateCabinetFilters();
     }
     
@@ -44,9 +48,7 @@ public:
         
         mixSmooth.setTargetValue (cabMix);
         
-        // Store dry signal for mixing
-        juce::AudioBuffer<float> dryBuffer (static_cast<int> (block.getNumChannels()),
-                                            static_cast<int> (block.getNumSamples()));
+        // Use pre-allocated dry buffer for mixing
         for (size_t ch = 0; ch < block.getNumChannels(); ++ch)
             dryBuffer.copyFrom (static_cast<int> (ch), 0, block.getChannelPointer (ch),
                                static_cast<int> (block.getNumSamples()));
@@ -102,4 +104,5 @@ private:
     juce::dsp::ProcessorDuplicator<juce::dsp::IIR::Filter<float>, juce::dsp::IIR::Coefficients<float>> cab1x15Filter;
     
     juce::SmoothedValue<float> mixSmooth;
+    juce::AudioBuffer<float> dryBuffer;  // Pre-allocated for wet/dry mixing
 };

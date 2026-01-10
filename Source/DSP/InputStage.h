@@ -55,7 +55,6 @@ public:
         for (size_t channel = 0; channel < block.getNumChannels(); ++channel)
         {
             auto* channelData = block.getChannelPointer (channel);
-            inputGainSmooth.reset (sampleRate, 0.05);
             
             for (size_t sample = 0; sample < block.getNumSamples(); ++sample)
             {

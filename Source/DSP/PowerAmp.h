@@ -28,6 +28,11 @@ public:
         
         // Envelope follower for sag
         envelopeState = 0.0f;
+        
+        // Calculate envelope time constants based on sample rate
+        // Attack: 10ms, Release: 1000ms
+        envelopeAttackCoeff = 1.0f - std::exp (-1.0f / (0.01f * static_cast<float> (sampleRate)));
+        envelopeReleaseCoeff = 1.0f - std::exp (-1.0f / (1.0f * static_cast<float> (sampleRate)));
     }
     
     void process (juce::dsp::ProcessContextReplacing<float>& context,
@@ -56,13 +61,11 @@ public:
                 
                 // Envelope follower for power supply sag
                 float inputAbs = std::abs (input);
-                float attackCoeff = 0.01f;
-                float releaseCoeff = 0.001f;
                 
                 if (inputAbs > envelopeState)
-                    envelopeState += attackCoeff * (inputAbs - envelopeState);
+                    envelopeState += envelopeAttackCoeff * (inputAbs - envelopeState);
                 else
-                    envelopeState += releaseCoeff * (inputAbs - envelopeState);
+                    envelopeState += envelopeReleaseCoeff * (inputAbs - envelopeState);
                 
                 // Power supply sag reduces gain during high input
                 float sagAmount = currentSag / 10.0f;
@@ -110,6 +113,8 @@ private:
     
     double sampleRate = 44100.0;
     float envelopeState = 0.0f;
+    float envelopeAttackCoeff = 0.01f;
+    float envelopeReleaseCoeff = 0.001f;
     
     juce::SmoothedValue<float> masterVolumeSmooth;
     juce::SmoothedValue<float> sagSmooth;

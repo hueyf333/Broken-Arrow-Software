@@ -47,7 +47,7 @@ public:
                 float currentBias = biasSmooth.getNextValue();
                 
                 // Apply gain and bias
-                float signal = input * currentGain * 0.5f + currentBias * 0.1f;
+                float signal = input * currentGain * TUBE_GAIN_SCALE + currentBias * BIAS_SCALE;
                 
                 // Multi-stage tube saturation
                 // Stage 1: Gentle saturation
@@ -66,6 +66,10 @@ public:
     }
     
 private:
+    // Tube modeling constants
+    static constexpr float TUBE_GAIN_SCALE = 0.5f;  // Pre-saturation gain scaling
+    static constexpr float BIAS_SCALE = 0.1f;       // Bias signal scaling
+    
     // Asymmetric tube saturation function
     float tubeSaturation (float input, float asymmetry)
     {
