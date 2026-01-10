@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="CtzxrV" name="SuperBassman" projectType="audioplug" useAppConfig="0"
+              addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" companyName="Broken Arrow Software"
+              companyCopyright="Copyright 2026 Broken Arrow Software" companyWebsite="https://github.com/hueyf333/Broken-Arrow-Software"
+              companyEmail="" pluginName="SuperBassman" pluginDesc="Fender Super Bassman Bass Head Emulation"
+              pluginManufacturer="BrokenArrow" pluginManufacturerCode="BrAr" pluginCode="SBsm"
+              pluginChannelConfigs="{1, 2}" pluginIsSynth="0" pluginWantsMidiIn="0"
+              pluginProducesMidiOut="0" pluginIsMidiEffectPlugin="0" pluginEditorRequiresKeys="0"
+              pluginAUExportPrefix="SuperBassmanAU" pluginRTASCategory="" aaxIdentifier="com.brokenarrow.superbassman"
+              pluginAAXCategory="2" cppLanguageStandard="20" displaySplashScreen="1"
+              reportAppUsage="1" splashScreenColour="Dark" defines="JUCE_VST3_CAN_REPLACE_VST2=0"
+              version="1.0.0" bundleIdentifier="com.brokenarrow.SuperBassman">
+  <MAINGROUP id="DcyNlF" name="SuperBassman">
+    <GROUP id="{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}" name="Source">
+      <GROUP id="{B2C3D4E5-F678-90AB-CDEF-123456789012}" name="DSP">
+        <FILE id="S9xGmz" name="InputStage.h" compile="0" resource="0" file="Source/DSP/InputStage.h"/>
+        <FILE id="T0yHna" name="ChannelRouting.h" compile="0" resource="0" file="Source/DSP/ChannelRouting.h"/>
+        <FILE id="U1zIob" name="TubePreamp.h" compile="0" resource="0" file="Source/DSP/TubePreamp.h"/>
+        <FILE id="V2aJpc" name="ToneStack.h" compile="0" resource="0" file="Source/DSP/ToneStack.h"/>
+        <FILE id="W3bKqd" name="OverdriveChannel.h" compile="0" resource="0" file="Source/DSP/OverdriveChannel.h"/>
+        <FILE id="X4cLre" name="PowerAmp.h" compile="0" resource="0" file="Source/DSP/PowerAmp.h"/>
+        <FILE id="Y5dMsf" name="CabinetSim.h" compile="0" resource="0" file="Source/DSP/CabinetSim.h"/>
+        <FILE id="Z6eNtg" name="OutputStage.h" compile="0" resource="0" file="Source/DSP/OutputStage.h"/>
+        <FILE id="A7fOuh" name="Oversampling.h" compile="0" resource="0" file="Source/DSP/Oversampling.h"/>
+      </GROUP>
+      <GROUP id="{C3D4E5F6-7890-ABCD-EF12-34567890ABCD}" name="UI">
+        <FILE id="B8gPvi" name="CustomLookAndFeel.h" compile="0" resource="0" file="Source/UI/CustomLookAndFeel.h"/>
+        <FILE id="C9hQwj" name="CustomLookAndFeel.cpp" compile="1" resource="0" file="Source/UI/CustomLookAndFeel.cpp"/>
+        <FILE id="D0iRxk" name="LevelMeter.h" compile="0" resource="0" file="Source/UI/LevelMeter.h"/>
+        <FILE id="E1jSyl" name="LevelMeter.cpp" compile="1" resource="0" file="Source/UI/LevelMeter.cpp"/>
+      </GROUP>
+      <FILE id="F2kTzm" name="PluginProcessor.cpp" compile="1" resource="0" file="Source/PluginProcessor.cpp"/>
+      <FILE id="G3lUan" name="PluginProcessor.h" compile="0" resource="0" file="Source/PluginProcessor.h"/>
+      <FILE id="H4mVbo" name="PluginEditor.cpp" compile="1" resource="0" file="Source/PluginEditor.cpp"/>
+      <FILE id="I5nWcp" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+    </GROUP>
+  </MAINGROUP>
+  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>
+  <EXPORTFORMATS>
+    <VS2022 targetFolder="Builds/VisualStudio2022">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="SuperBassman"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="SuperBassman"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_dsp" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../../JUCE/modules"/>
+      </MODULEPATHS>
+    </VS2022>
+    <XCODE_MAC targetFolder="Builds/MacOSX">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="SuperBassman"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="SuperBassman"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_dsp" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../../JUCE/modules"/>
+      </MODULEPATHS>
+    </XCODE_MAC>
+    <LINUX_MAKE targetFolder="Builds/LinuxMakefile">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="SuperBassman"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="SuperBassman"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_dsp" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../../JUCE/modules"/>
+      </MODULEPATHS>
+    </LINUX_MAKE>
+  </EXPORTFORMATS>
+  <MODULES>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_audio_plugin_client" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_dsp" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+  </MODULES>
+</JUCERPROJECT>
