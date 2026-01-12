@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+*.manifest
+*.spec
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project specific
+*.bak
+*.autosave
+*.recovery
+hair_curves_studio/assets/*.obj
+hair_curves_studio/assets/*.gltf
+hair_curves_studio/assets/*.glb
+hair_curves_studio/assets/*.fbx
+hair_curves_studio/assets/*.abc
+
+# Keep sample assets
+!hair_curves_studio/assets/sample_scalp.obj
+!hair_curves_studio/assets/sample_density.png
+!hair_curves_studio/assets/presets.json
+
+# Test outputs
+test_output/
+*.png.test
+*.obj.test
+
+# Logs
+*.log

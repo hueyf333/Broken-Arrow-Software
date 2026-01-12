@@ -1,0 +1,89 @@
+{
+  "presets": {
+    "short_hair": {
+      "description": "Short hairstyle preset",
+      "hair_description": {
+        "density": 5000,
+        "length": 5.0,
+        "length_randomness": 0.2,
+        "width_root": 0.8,
+        "width_tip": 0.1,
+        "num_points": 8
+      },
+      "modifiers": [
+        {
+          "type": "LengthModifier",
+          "parameters": {
+            "factor": 1.0,
+            "offset": 0.0
+          }
+        },
+        {
+          "type": "NoiseModifier",
+          "parameters": {
+            "amplitude": 0.3,
+            "frequency": 3.0,
+            "seed": 42
+          }
+        }
+      ]
+    },
+    "long_curly": {
+      "description": "Long curly hairstyle preset",
+      "hair_description": {
+        "density": 8000,
+        "length": 20.0,
+        "length_randomness": 0.3,
+        "width_root": 1.0,
+        "width_tip": 0.1,
+        "num_points": 16
+      },
+      "modifiers": [
+        {
+          "type": "CurlModifier",
+          "parameters": {
+            "radius": 2.0,
+            "tightness": 1.5,
+            "variation": 0.2
+          }
+        },
+        {
+          "type": "BendModifier",
+          "parameters": {
+            "strength": 0.5,
+            "direction": [0.0, 0.0, -1.0],
+            "damping": 0.0
+          }
+        }
+      ]
+    },
+    "straight_long": {
+      "description": "Long straight hair preset",
+      "hair_description": {
+        "density": 10000,
+        "length": 30.0,
+        "length_randomness": 0.1,
+        "width_root": 0.9,
+        "width_tip": 0.05,
+        "num_points": 20
+      },
+      "modifiers": [
+        {
+          "type": "BendModifier",
+          "parameters": {
+            "strength": 1.0,
+            "direction": [0.0, 0.0, -1.0],
+            "damping": 0.1
+          }
+        },
+        {
+          "type": "SmoothModifier",
+          "parameters": {
+            "iterations": 2,
+            "strength": 0.5
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,27 @@
+# Broken Arrow Hair Curves Studio Dependencies
+# Python 3.11+ required
+
+# GUI Framework
+PySide6==6.6.1
+
+# 3D Rendering
+moderngl==5.10.0
+PyOpenGL==3.1.7
+PyOpenGL-accelerate==3.1.7
+
+# Math and Geometry
+numpy==1.26.3
+scipy==1.11.4
+
+# Image Processing
+Pillow==10.3.0
+
+# I/O and File Formats
+pygltflib==1.16.1
+trimesh==4.0.10
+
+# Utilities
+python-dotenv==1.0.0
+
+# Packaging (optional, for building standalone executables)
+pyinstaller==6.3.0
