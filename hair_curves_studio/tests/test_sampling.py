@@ -42,10 +42,10 @@ def test_uniform_guide_generation():
 
 def test_strand_generation():
     """Test strand generation from guides"""
-    # Create simple guides
-    vertices = np.array([[0, 0, 0], [5, 0, 0]], dtype=np.float32)
-    triangles = np.array([[0, 0, 0]], dtype=np.int32)
-    normals = np.array([[0, 0, 1], [0, 0, 1]], dtype=np.float32)
+    # Create simple triangle mesh
+    vertices = np.array([[0, 0, 0], [5, 0, 0], [2.5, 5, 0]], dtype=np.float32)
+    triangles = np.array([[0, 1, 2]], dtype=np.int32)
+    normals = np.array([[0, 0, 1], [0, 0, 1], [0, 0, 1]], dtype=np.float32)
     
     guides = GuideGenerator.generate_uniform(
         vertices=vertices,
@@ -77,9 +77,9 @@ def test_strand_generation():
 
 def test_strand_interpolation():
     """Test single strand interpolation from guides"""
-    vertices = np.array([[0, 0, 0]], dtype=np.float32)
-    triangles = np.array([[0, 0, 0]], dtype=np.int32)
-    normals = np.array([[0, 0, 1]], dtype=np.float32)
+    vertices = np.array([[0, 0, 0], [5, 0, 0], [2.5, 5, 0]], dtype=np.float32)
+    triangles = np.array([[0, 1, 2]], dtype=np.int32)
+    normals = np.array([[0, 0, 1], [0, 0, 1], [0, 0, 1]], dtype=np.float32)
     
     guides = GuideGenerator.generate_uniform(
         vertices=vertices,
