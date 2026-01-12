@@ -1,0 +1,1 @@
+"""Hair package initialization"""
