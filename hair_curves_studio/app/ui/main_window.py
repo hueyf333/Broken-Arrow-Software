@@ -267,12 +267,152 @@ class MainWindow(QMainWindow):
     # Demo
     def run_quick_demo(self):
         """Run quick demonstration"""
-        QMessageBox.information(
-            self,
-            "Quick Demo",
-            "Quick Demo feature: This would load a sample scalp, generate hair, "
-            "apply modifiers, bake, and export. Implementation in progress."
-        )
+        from PySide6.QtCore import QTimer
+        from pathlib import Path
+        import numpy as np
+        
+        try:
+            # Step 1: Import sample scalp
+            self.statusbar.showMessage("Demo: Loading sample scalp...", 5000)
+            logger.info("Quick Demo: Starting...")
+            
+            from ..io.import_mesh import import_mesh
+            from ..hair.guides import GuideGenerator
+            from ..hair.strands import StrandGenerator
+            from ..hair.modifiers import ModifierStack, ClumpModifier, CurlModifier, NoiseModifier, BendModifier
+            from ..hair.bake_cards import bake_to_cards
+            from ..io.export_obj import export_obj
+            from ..io.export_gltf import export_gltf
+            
+            scalp_path = Path(__file__).parent.parent.parent / "assets" / "sample_scalp.obj"
+            mesh_data = import_mesh(scalp_path)
+            
+            if not mesh_data:
+                QMessageBox.warning(self, "Demo Error", "Failed to load sample scalp")
+                return
+            
+            # Add scalp to viewport
+            self.viewport.add_mesh(
+                "sample_scalp",
+                mesh_data['vertices'],
+                mesh_data['triangles'],
+                mesh_data['normals'],
+                mesh_data['uvs']
+            )
+            self.viewport.frame_all()
+            
+            # Step 2: Generate guides
+            self.statusbar.showMessage("Demo: Generating guides...", 5000)
+            logger.info("Quick Demo: Generating guides...")
+            
+            guides = GuideGenerator.generate_uniform(
+                vertices=mesh_data['vertices'],
+                triangles=mesh_data['triangles'],
+                normals=mesh_data['normals'],
+                count=50,
+                length=8.0,
+                length_randomness=0.2,
+                num_points=10,
+                seed=42
+            )
+            
+            # Step 3: Generate strands
+            self.statusbar.showMessage("Demo: Generating strands...", 5000)
+            logger.info(f"Quick Demo: Generating strands from {len(guides)} guides...")
+            
+            strands = StrandGenerator.generate_strands(
+                guides=guides,
+                vertices=mesh_data['vertices'],
+                triangles=mesh_data['triangles'],
+                normals=mesh_data['normals'],
+                strands_per_guide=8,
+                num_points=10,
+                interpolation_radius=15.0,
+                seed=42
+            )
+            
+            # Step 4: Apply modifiers
+            self.statusbar.showMessage("Demo: Applying modifiers...", 5000)
+            logger.info(f"Quick Demo: Applying modifiers to {len(strands)} strands...")
+            
+            stack = ModifierStack()
+            
+            clump_mod = ClumpModifier()
+            clump_mod.strength = 0.4
+            stack.add_modifier(clump_mod)
+            
+            curl_mod = CurlModifier()
+            curl_mod.radius = 1.5
+            curl_mod.tightness = 1.2
+            stack.add_modifier(curl_mod)
+            
+            noise_mod = NoiseModifier()
+            noise_mod.amplitude = 0.3
+            noise_mod.frequency = 4.0
+            stack.add_modifier(noise_mod)
+            
+            bend_mod = BendModifier()
+            bend_mod.strength = 0.8
+            stack.add_modifier(bend_mod)
+            
+            # Apply modifiers (use subset for performance in demo)
+            demo_strands = strands[:100] if len(strands) > 100 else strands
+            stack.apply_all(demo_strands, {})
+            
+            # Step 5: Bake to hair cards
+            self.statusbar.showMessage("Demo: Baking hair cards...", 5000)
+            logger.info("Quick Demo: Baking to hair cards...")
+            
+            verts, norms, uvs, tris = bake_to_cards(
+                curves=demo_strands,
+                card_width=1.2,
+                segments_per_card=10,
+                strands_per_card=4
+            )
+            
+            # Step 6: Export
+            export_dir = Path.home() / "HairCurvesStudio_Demo_Output"
+            export_dir.mkdir(exist_ok=True)
+            
+            self.statusbar.showMessage("Demo: Exporting...", 5000)
+            logger.info(f"Quick Demo: Exporting to {export_dir}...")
+            
+            # Export OBJ
+            obj_path = export_dir / "demo_hair.obj"
+            export_obj(obj_path, verts, tris, norms, uvs, "demo_hair")
+            
+            # Export GLTF
+            gltf_path = export_dir / "demo_hair.gltf"
+            export_gltf(gltf_path, verts, tris, norms, uvs, "demo_hair", binary=False)
+            
+            # Show success
+            self.statusbar.showMessage(f"Demo complete! Output: {export_dir}", 10000)
+            
+            QMessageBox.information(
+                self,
+                "Quick Demo Complete",
+                f"Demo completed successfully!\n\n"
+                f"Generated:\n"
+                f"• {len(guides)} guide curves\n"
+                f"• {len(strands)} hair strands\n"
+                f"• Applied {len(stack.modifiers)} modifiers\n"
+                f"• Baked to {len(verts)} vertices, {len(tris)} triangles\n\n"
+                f"Exported to:\n"
+                f"• {obj_path}\n"
+                f"• {gltf_path}\n\n"
+                f"You can import these files into Unreal Engine or Daz Studio!"
+            )
+            
+            logger.info("Quick Demo: Complete!")
+            
+        except Exception as e:
+            logger.error(f"Quick Demo failed: {e}")
+            logger.exception(e)
+            QMessageBox.critical(
+                self,
+                "Demo Error",
+                f"Demo failed with error:\n{str(e)}\n\nCheck logs for details."
+            )
     
     def show_about(self):
         """Show about dialog"""
