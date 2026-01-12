@@ -14,7 +14,7 @@ numpy==1.26.3
 scipy==1.11.4
 
 # Image Processing
-Pillow==10.2.0
+Pillow==10.3.0
 
 # I/O and File Formats
 pygltflib==1.16.1

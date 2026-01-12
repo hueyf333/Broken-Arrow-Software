@@ -12,7 +12,7 @@ dependencies = [
     "PyOpenGL>=3.1.7",
     "numpy>=1.26.3",
     "scipy>=1.11.4",
-    "Pillow>=10.2.0",
+    "Pillow>=10.3.0",
     "pygltflib>=1.16.1",
     "trimesh>=4.0.10",
 ]
